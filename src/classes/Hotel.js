@@ -1,14 +1,22 @@
 
 class Hotel {
-  constructor(bookingData, roomData, customerData, id) {
+  constructor(bookingData, roomData, customerData, currentCustomer) {
+    this.currentDate = ''
     this.bookingData = bookingData
     this.roomData = roomData
     this.customerData = customerData
     this.allBookings = []
 
-    this.currentCustomerId = id
-    this.currentCustomer = {}
+    this.currentCustomerId = currentCustomer.id
+    this.currentCustomer = currentCustomer
     this.currentCustomerBookings = null
+  }
+
+  getCurrentDate() {
+    // ---->   input type date in HTML <------//
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    this.currentDate = date
   }
 
   updateCurrentCustomer(id, bookings) {
@@ -16,7 +24,7 @@ class Hotel {
   }
 
   updateAllBookings() {
-    
+
   }
 
   updateCustomerBookings() {
