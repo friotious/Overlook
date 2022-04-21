@@ -15,33 +15,33 @@ describe('Customer', () => {
     customer = new Customer(customers[0], )
   })
 
-  it('Should be a function', () => {
+  it.skip('Should be a function', () => {
     expect(Customer).to.be.a('function');
   });
 
-  it('Should hold customer data', () => {
+  it.skip('Should hold customer data', () => {
     expect(customer.id).to.equal(1)
     expect(customer.name).to.equal("Leatha Ullrich")
   })
 
-  it('Should hold its bookings', () => {
+  it.skip('Should hold its bookings', () => {
     expect(customer.allBookings[0]).to.be.an.instanceOf(Booking)
     expect(customer.allBookings[0].id).to.equal("5fwrgu4i7k55hl6t8")
   })
 
-  it('Should store totalSpent on all rooms', () => {
+  it.skip('Should store totalSpent on all rooms', () => {
     calculateTotalSpent()
     expect(customer.totalSpent).to.equal()
   })
 
-  it('Should filter past/present/future bookings', () => {
+  it.skip('Should filter past/present/future bookings', () => {
     customer.sortBookings()
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6t8")
     expect(customer.presentBooking[0].id).to.equal()
     expect(customer.futureBookings[0].id).to.equal()
   })
 
-  it('Should have methods to return all Bookings', () => {
+  it.skip('Should have methods to return all Bookings', () => {
     expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6t8")
     expect(customer.getPresentBooking()[0].id).to.equal("")
     expect(customer.getFutureBookings()[0].id).to.equal("")

@@ -17,15 +17,15 @@ describe('Room', () => {
     room = new Room(rooms[3])
   })
 
-  it.only('Should be a function', () => {
+  it.skip('Should be a function', () => {
     expect(Room).to.be.a('function');
   });
 
-  it.only("Should hold room data for room", () => {
+  it.skip("Should hold room data for room", () => {
     expect(room.costPerNight).to.equal(172.09)
   })
 
-  it.only('Should return info about room', () => {
+  it.skip('Should return info about room', () => {
     expect(room.getRoomNumber()).to.equal(12)
     expect(room.getRoomType()).to.equal("single room")
     expect(room.hasBidet

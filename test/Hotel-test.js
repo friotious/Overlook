@@ -16,11 +16,11 @@ describe('Hotel', () => {
     customer = new Customer(customers[0])
   })
 
-  it('Should be a function', () => {
+  it.skip('Should be a function', () => {
     expect(Hotel).to.be.a('function');
   });
 
-  it('Should have the current date', () => {
+  it.skip('Should have the current date', () => {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     console.log(date, 'test-date')
@@ -28,7 +28,7 @@ describe('Hotel', () => {
     expect(hotel.currentDate).to.equal(date)
   })
 
-  it('Should hold booking data objects', () => {
+  it.skip('Should hold booking data objects', () => {
     expect(hotel.bookingData[0]).to.deep.equal({
       "id": "5fwrgu4i7k55hl6sz",
       "userID": 9,
@@ -37,7 +37,7 @@ describe('Hotel', () => {
     })
   })
 
-  it('Should hold all roomData', () => {
+  it.skip('Should hold all roomData', () => {
     expect(hotel.roomData[0]).to.deep.equal({
       "number": 1,
       "roomType": "residential suite",
@@ -48,7 +48,7 @@ describe('Hotel', () => {
     })
   })
 
-    it('Should hold all customerData', () => {
+    it.skip('Should hold all customerData', () => {
       expect(hotel.customerData[0]).to.deep.equal({
         "id": 1,
         "name": "Leatha Ullrich"
