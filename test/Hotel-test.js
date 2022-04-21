@@ -8,10 +8,10 @@ import Hotel from '../src/classes/Hotel.js';
 
 describe('Hotel', () => {
   let hotel
-  let booking
+  let newBooking
   let customer
   beforeEach(() => {
-    booking = new Booking(bookings, rooms)
+    newBooking = new Booking(bookings[4], rooms[3])
     hotel = new Hotel(bookings, rooms, customers)
     customer = new Customer(customers[0])
   })
@@ -21,7 +21,7 @@ describe('Hotel', () => {
   });
 
   it('Should hold booking data objects', () => {
-    expect(this.allBookings[0]).to.deep.equal({
+    expect(hotel.bookingData[0]).to.deep.equal({
       "id": "5fwrgu4i7k55hl6sz",
       "userID": 9,
       "date": "2022/04/22",
@@ -29,8 +29,8 @@ describe('Hotel', () => {
     })
   })
 
-  it('Should hold all roomData', () => {
-    expect(this.allRooms[0]).to.deep.equal({
+  ('Should hold all roomData', () => {
+    expect(hotel.allRooms[0]).to.deep.equal({
       "number": 1,
       "roomType": "residential suite",
       "bidet": true,
@@ -38,21 +38,50 @@ describe('Hotel', () => {
       "numBeds": 1,
       "costPerNight": 358.4
     })
+  })
 
-    it('Should hold all customerData', () => {
-      expect(this.allCustomers[0]).to.equal({
+    it.skip('Should hold all customerData', () => {
+      expect(hotel.customerData[0]).to.equal({
         "id": 1,
         "name": "Leatha Ullrich"
       })
     })
 
-    it('Should hold a currentUser class', () => {
-      expect(this.currentUser).to.be.an.instanceOf(Customer)
+    it.skip('Should have a method to make a currentCustomer', () => {
+      hotel.updateCurrentCustomer(1,)
+      expect(this.currentCustomer).to.be.an.instanceOf(Customer)
     })
 
-    it('Should hold currentBookings', () => {
-      expect(this.currentBookings).to.be.a('array')
+    it.skip('Should hold a currentUser class', () => {
+      expect(hotel.currentCustomer).to.be.an.instanceOf(Customer)
+    })
+
+    it.skip('Should hold currentBookings', () => {
+      expect(hotel.currentUserBookings).to.be.a('array')
+      expect(hotel.currentUserBookings[0]).to.be.a('object')
+    })
+
+    it.skip('Should have a method to filter/hold currentUserBookings', () => {
+      expect(hotel.currentCustomerBookings[0]).to.deep.equal()
+    })
+
+    it.skip('Should have a method to update allBookings into array of instances of Booking', () => {
+      expect(hotel.allBookings[0]).to.be.an('object')
+      hotel.updateAllBookings()
+      expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
+    })
+
+    it.skip('Should have a method to fill the current customers booking array with Bookings', () => {
+      hotel.updateCustomerBookings()
+      expect(hotel.currentCustomerBookings[0]).to.deep.equal()
+    })
+
+    it.skip('Should have a method to create a new Booking class', () => {
+      expect(hotel.makeBooking(bookings[4], rooms[3])).to.be.an.instanceOf(Booking)
+    })
+
+    it.skip('Should have a method to update allBookings', () => {
+      hotel.updateAllBookings()
+      expect(hotel.allBookings[3]).to.be.an.instanceOf(Booking)
     })
   })
-
-})

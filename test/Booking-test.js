@@ -11,7 +11,7 @@ describe('Booking', () => {
   let booking
 
   beforeEach(() => {
-  booking = new Booking(bookings[0], rooms[3])
+  booking = new Booking(bookings[4], rooms[3])
 
   })
 
@@ -28,7 +28,7 @@ describe('Booking', () => {
     expect(booking.userID).to.equal(1)
     expect(booking.date).to.equal("2022/02/05")
     expect(booking.roomNumber).to.equal(12)
-    expect(booking.cost).to.equal(294.56)
+    expect(booking.cost).to.equal(172.09)
   })
 
   it("Should hold room data for room booked", () => {
@@ -49,5 +49,6 @@ describe('Booking', () => {
   it("Should have a method to return date", () => {
     expect(booking.getDate()).to.equal("2022/02/05")
   })
+  console.log(booking, 'booking')
 
 })
