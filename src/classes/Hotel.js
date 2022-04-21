@@ -1,15 +1,12 @@
-
+import Booking from "./Booking.js";
 class Hotel {
-  constructor(bookingData, roomData, customerData, currentCustomer) {
+  constructor(bookingData = [], roomData = [], customerData = []) {
     this.currentDate = ''
     this.bookingData = bookingData
     this.roomData = roomData
     this.customerData = customerData
     this.allBookings = []
-
-    this.currentCustomerId = currentCustomer.id
-    this.currentCustomer = currentCustomer
-    this.currentCustomerBookings = null
+    this.currentCustomerID = 0
   }
 
   getCurrentDate() {
@@ -19,12 +16,18 @@ class Hotel {
     this.currentDate = date
   }
 
+  makeID(id) {
+    this.currentCustomerID = id
+
+  }
+    
   updateCurrentCustomer(id, bookings) {
 
   }
 
   updateAllBookings() {
-
+    console.log(this.bookingData, 'data')
+    this.bookingData.forEach(booking => this.allBookings.push(new Booking(booking)))
   }
 
   updateCustomerBookings() {
