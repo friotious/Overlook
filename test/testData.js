@@ -58,6 +58,14 @@ const rooms = [
       "bedSize": "king",
       "numBeds": 1,
       "costPerNight": 491.14
+    },
+    {
+      "number": 15,
+      "roomType": "residential suite",
+      "bidet": false,
+      "bedSize": "full",
+      "numBeds": 1,
+      "costPerNight": 294.56
     }
   ]
   export { bookings, customers, rooms}
