@@ -29,7 +29,7 @@ describe('Booking', () => {
   })
 
   it.skip('Should hold room data', () => {
-    expect(booking.roomData).to.equal(rooms[3])
+    expect(booking.room).to.equal(rooms[3])
   })
 
 
