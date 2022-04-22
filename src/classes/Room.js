@@ -6,6 +6,7 @@ class Room {
     this.bedSize = data.bedSize
     this.numBeds = data.numBeds
     this.costPerNight = data.costPerNight
+    this.nightsBooked = []
   }
 
   getRoomNumber() {
