@@ -12,8 +12,6 @@ describe('Customer', () => {
 
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms, customers, customers[0])
-    hotel.updateAllRooms()
-    hotel.updateAllBookings()
     customer = new Customer(customers[0], bookings)
   })
 
@@ -32,7 +30,7 @@ describe('Customer', () => {
     expect(sameID.every(id => id === 1))
   })
 
-  it('Should store totalSpent on all rooms', () => {
+  it.skip('Should store totalSpent on all rooms', () => {
     calculateTotalSpent()
     expect(customer.totalSpent).to.equal()
   })
