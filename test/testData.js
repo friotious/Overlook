@@ -123,6 +123,5 @@ const rooms = [
       "numBeds": 1,
       "costPerNight": 294.56
     },
-
   ]
   export { bookings, customers, rooms}
