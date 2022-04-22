@@ -1,4 +1,7 @@
 import Booking from "./Booking.js";
+import Room from "./Room.js";
+import Customer from "./Customer.js";
+
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = []) {
     this.currentDate = ''
@@ -6,7 +9,9 @@ class Hotel {
     this.roomData = roomData
     this.customerData = customerData
     this.allBookings = []
-    this.currentCustomerID = 0
+    this.allRooms = []
+    this.currentCustomer = {}
+    this.currentCustomerBookings = []
   }
 
   getCurrentDate() {
@@ -16,32 +21,29 @@ class Hotel {
     this.currentDate = date
   }
 
-  makeID(id) {
-    this.currentCustomerID = id
-
-  }
-    
-  updateCurrentCustomer(id, bookings) {
-
+  addCustomer(id) {
+    let newCustomer = this.customerData.find(customer => customer.id === id)
+    this.currentCustomer = new Customer(newCustomer)
   }
 
   updateAllBookings() {
-    console.log(this.bookingData, 'data')
     this.bookingData.forEach(booking => this.allBookings.push(new Booking(booking)))
   }
 
-  updateCustomerBookings() {
-
-  }
-
-  makeBooking(booking, room) {
-
+  updateAllRooms() {
+    this.roomData.forEach(room => this.allRooms.push(new Room(room)))
   }
 
   getCustomerBookings(id) {
-    let result = this.allBookings.filter(booking => booking.userID === id)
-    this.currentCustomerBookings = result
+    let bookings = this.allBookings.filter(booking => booking.userID === id)
+    this.currentCustomerBookings = bookings
+    return bookings
   }
+
+  makeBooking(somedata) {
+
+  }
+
 }
 
 export default Hotel;
