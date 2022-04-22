@@ -11,26 +11,26 @@ describe('Customer', () => {
   let customer
 
   beforeEach(() => {
-    hotel = new Hotel(bookings, rooms, customers, customers[0])
+    hotel = new Hotel(bookings, rooms, customers, 1)
     customer = hotel.currentCustomer
   })
 
-  it.skip('Should be a function', () => {
+  it('Should be a function', () => {
     expect(Customer).to.be.a('function');
   });
 
-  it.skip('Should hold customer data', () => {
+  it('Should hold customer data', () => {
     expect(customer.id).to.equal(1)
     expect(customer.name).to.equal("Leatha Ullrich")
   })
 
-  it.skip('Should be able to hold its bookings', () => {
-    expect(customer.bookings[0]).to.be.a.instanceOf(Booking)
-    let sameID = customer.bookings.map(booking => booking.userID)
+  it('Should be able to hold its bookings', () => {
+    expect(customer.allBookings[0]).to.be.a.instanceOf(Booking)
+    let sameID = customer.allBookings.map(booking => booking.userID)
     expect(sameID.every(id => id === 1))
   })
 
-  it.skip('Should store totalSpent on all rooms', () => {
+  it('Should store totalSpent on all rooms', () => {
     calculateTotalSpent()
     expect(customer.totalSpent).to.equal()
   })

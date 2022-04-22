@@ -21,18 +21,18 @@ describe('Hotel', () => {
     //customer = new Customer(customers[0])
   })
 
-  it('Should be a function', () => {
+  it.skip('Should be a function', () => {
     expect(Hotel).to.be.a('function');
   });
 
-  it('Should have the current date', () => {
+  it.skip('Should have the current date', () => {
     var today = new Date();
     var date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
     hotel.getCurrentDate()
     expect(hotel.currentDate).to.equal(date)
   })
 
-  // it('Should hold booking data objects', () => {
+  // it.skip('Should hold booking data objects', () => {
   //   expect(hotel.bookingData[0]).to.deep.equal({
   //     "id": "5fwrgu4i7k55hl6sz",
   //     "userID": 1,
@@ -52,23 +52,21 @@ describe('Hotel', () => {
   //   })
   // })
 
-  it('Should have a method to update allBookings into array of instances of Booking', () => {
-    expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
-  })
 
-  it('Should add/hold currentCustomer ID', () => {
+
+  it.skip('Should add/hold currentCustomer ID', () => {
     expect(hotel.currentCustomer.id).to.equal(1)
   })
 
-  it('Should have a method to instanciate allCustomers', () => {
+  it.skip('Should have a method to instanciate allCustomers', () => {
     expect(hotel.allCustomers[0]).to.be.an.instanceOf(Customer)
   })
 
-  it('Should have a method to instanciate allRooms', () => {
+  it.skip('Should have a method to instanciate allRooms', () => {
     expect(hotel.allRooms[0]).to.be.an.instanceOf(Room)
   })
 
-  it('Should have a method to instanciate allBookings', () => {
+  it.skip('Should have a method to instanciate allBookings', () => {
     expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 

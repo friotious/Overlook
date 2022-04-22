@@ -15,10 +15,15 @@ class Hotel {
     this.currentCustomer = {}
     this.getCurrentDate()
     this.updateAllRooms(roomData)
+    //console.log(this.allRooms, 'this.allrooms ?')
     this.updateAllBookings(bookingData)
     this.addRoom()
+    // console.log(this.allBookings, 'this.allbookings = should add room = ?')
     this.updateAllCustomers(customerData)
+    //console.log(this.allCustomers, 'this.allCustomers')
     this.addCurrentCustomer(id)
+    //console.log(this.currentCustomer, 'this.curretnCustomer')
+    this.addBookings()
     //this.addCustomer(id)
   }
 
@@ -31,7 +36,7 @@ class Hotel {
   }
 
   updateAllCustomers(somedata) {
-    somedata.forEach(booking => this.allCustomers.push(new Customer(booking)))
+    somedata.forEach(customer => this.allCustomers.push(new Customer(customer)))
   }
 
   addCurrentCustomer(id) {
@@ -39,23 +44,27 @@ class Hotel {
     this.currentCustomer = newCustomer
   }
 
-  // addBookings() {
-  //   this.allCustomers.forEach(customer => this.allBookings.forEach(booking => {
-  //     if (booking.userID === customer.id) {
-  //       customer.bookings.push(booking)
-  //     }
-  //   }))
-  // }
+  addBookings() {
+    this.allCustomers.forEach(customer => {
+      var bookings = this.allBookings.filter(booking => {
+        return booking.userID === customer.id
+      })
+      customer.allBookings = bookings
+      //console.log(bookings, 'var bookings = array?')
+      // this.currentCustomer.allBookings = bookings
+      //console.log(this.currentCustomer, 'cc')
+      //console.log(this.currentCustomer.allBookings, 'ab')
+
+    })
+  }
 
   addRoom() {
     this.allBookings.forEach(booking => {
-      this.allRooms.forEach(room => {
-      if (room.number === booking.roomNumber) {
-        //console.log(booking.room)
-        booking.room.push(room)
-        //console.log(this.allBookings[1].room, 'check if has room')
-      }
-    })})
+      var room = this.allRooms.find(room => {
+        return room.number === booking.roomNumber
+      })
+      booking.room = room
+    })
   }
 
   getCurrentDate() {
