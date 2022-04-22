@@ -4,7 +4,7 @@ import Customer from "./Customer.js";
 
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
-    this.currentDate = ''
+    this.currentDate = 'oops'
     //this.bookingData = bookingData
     //this.roomData = roomData
     //this.customerData = customerData
@@ -35,7 +35,8 @@ class Hotel {
   }
 
   addCurrentCustomer(id) {
-    this.currentCustomer = this.allCustomers.find(customer => customer.id === id)
+    let newCustomer = this.allCustomers.find(customer => customer.id === id)
+    this.currentCustomer = newCustomer
   }
 
   // addBookings() {
@@ -47,11 +48,14 @@ class Hotel {
   // }
 
   addRoom() {
-    this.allBookings.forEach(booking => this.allRooms.forEach(room => {
+    this.allBookings.forEach(booking => {
+      this.allRooms.forEach(room => {
       if (room.number === booking.roomNumber) {
+        //console.log(booking.room)
         booking.room.push(room)
+        //console.log(this.allBookings[1].room, 'check if has room')
       }
-    }))
+    })})
   }
 
   getCurrentDate() {

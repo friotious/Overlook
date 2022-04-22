@@ -17,71 +17,59 @@ describe('Hotel', () => {
 
   beforeEach(() => {
     //newBooking = new Booking(bookings[4], rooms[3])
-    hotel = new Hotel(bookings, rooms, customers)
+    hotel = new Hotel(bookings, rooms, customers, 1 )
     //customer = new Customer(customers[0])
   })
 
-  it.skip('Should be a function', () => {
+  it('Should be a function', () => {
     expect(Hotel).to.be.a('function');
   });
 
-  it.skip('Should have the current date', () => {
+  it('Should have the current date', () => {
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
     hotel.getCurrentDate()
     expect(hotel.currentDate).to.equal(date)
   })
 
-  it.skip('Should hold booking data objects', () => {
-    expect(hotel.bookingData[0]).to.deep.equal({
-      "id": "5fwrgu4i7k55hl6sz",
-      "userID": 1,
-      "date": "2022/04/22",
-      "roomNumber": 15
-    })
-  })
+  // it('Should hold booking data objects', () => {
+  //   expect(hotel.bookingData[0]).to.deep.equal({
+  //     "id": "5fwrgu4i7k55hl6sz",
+  //     "userID": 1,
+  //     "date": "2022/04/22",
+  //     "roomNumber": 15
+  //   })
+  // })
+  //
+  // it.skip('Should hold all roomData', () => {
+  //   expect(hotel.roomData[0].costPerNight).to.equal(358.4)
+  // })
+  //
+  // it.skip('Should hold all customerData', () => {
+  //   expect(hotel.customerData[0]).to.deep.equal({
+  //     "id": 1,
+  //     "name": "Leatha Ullrich"
+  //   })
+  // })
 
-  it.skip('Should hold all roomData', () => {
-    expect(hotel.roomData[0].costPerNight).to.equal(358.4)
-  })
-
-  it.skip('Should hold all customerData', () => {
-    expect(hotel.customerData[0]).to.deep.equal({
-      "id": 1,
-      "name": "Leatha Ullrich"
-    })
-  })
-
-  it.skip('Should have a method to update allBookings into array of instances of Booking', () => {
-    expect(hotel.bookingData[0]).to.be.an('object')
-    hotel.updateAllBookings()
+  it('Should have a method to update allBookings into array of instances of Booking', () => {
     expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 
-  it.skip('Should add/hold currentCustomer ID', () => {
-    expect(hotel.currentCustomerID).to.equal(1)
+  it('Should add/hold currentCustomer ID', () => {
+    expect(hotel.currentCustomer.id).to.equal(1)
   })
 
-  it.skip('Should return current Customers Bookings', () => {
-    hotel.updateAllBookings()
-    expect(hotel.getCustomerBookings(1)).to.be.a('array')
-    expect(hotel.getCustomerBookings(1)[0].id).to.equal("5fwrgu4i7k55hl6sz")
+  it('Should have a method to instanciate allCustomers', () => {
+    expect(hotel.allCustomers[0]).to.be.an.instanceOf(Customer)
   })
 
-  it.skip('Should have a method to update allBookings', () => {
-    hotel.bookingData.push({
-      "id": "5fwrgu4i7k55hl6v6",
-      "userID": 41,
-      "date": "2022/02/19",
-      "roomNumber": 12
-    })
-    hotel.updateAllBookings() // --> sortBOokings by date, compare arrays
-    expect(hotel.allBookings[11]).to.be.an.instanceOf(Booking)
+  it('Should have a method to instanciate allRooms', () => {
+    expect(hotel.allRooms[0]).to.be.an.instanceOf(Room)
   })
 
-  it.skip('Should have a method to return cost per night of a room', () => {
-    hotel.updateAllRooms()
-    expect(hotel.getCostPerNight(1)).to.equal(358.4)
+  it('Should have a method to instanciate allBookings', () => {
+    expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 
 })
