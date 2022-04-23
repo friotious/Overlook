@@ -7,9 +7,9 @@ class Customer {
     this.id = data.id
     this.name = data.name
     this.allBookings = []
-    this.pastBookings = []
-    this.presentBooking = []
-    this.futureBookings = []
+    this.pastBookings = ''
+    this.presentBooking = ''
+    this.futureBookings = ''
     this.totalSpent = 0
     this.getCurrentDate()
 
@@ -17,10 +17,18 @@ class Customer {
   }
 
   // ---->   input type date in HTML <------//
-
   getCurrentDate() {
     this.currentDate = moment().format('YYYY/MM/DD');
     return this.currentDate
+  }
+
+  sortBookings() {
+    let past = this.allBookings.filter(booking => booking.date < this.currentDate)
+    this.pastBookings = past
+    let present = this.allBookings.filter(booking => booking.date === this.currentDate).pop()
+    this.presentBooking = present
+    let future = this.allBookings.filter(booking => booking.date > this.currentDate)
+    this.futureBookings = future
   }
 
   calculateTotalSpent() {
@@ -31,28 +39,22 @@ class Customer {
      })
    }
 
-   sortBookings() {
-     let past = this.allBookings.filter(booking => booking.date < this.currentDate)
-     this.pastBookings = past
-
-     let present = this.allBookings.filter(booking => booking.date === this.currentDate)
-     this.presentBooking = present
-     let future = this.allBookings.filter(booking => booking.date > this.currentDate)
-     this.futureBookings = future
+   getAllBookings() {
+     return this.allBookings
    }
 
 
+   getPastBookings() {
+     return this.pastBookings
+   }
 
-//.filter(booking => booking.date < this.date
+   getPresentBooking() {
+     return this.presentBooking
+   }
 
-
-
-
-
-  // updateBookings(somedata) {
-  //   somedata.filter(booking => booking.userID === this.id)
-  //   .forEach(booking => this.allBookings.push(booking)
-  // )}
+   getFutureBookings() {
+     return this.futureBookings
+   }
 
   getBookings() {
     return this.bookings

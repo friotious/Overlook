@@ -36,29 +36,23 @@ describe('Customer', () => {
   })
 
   it('Should store totalSpent on all rooms', () => {
-    //console.log('test', customer.sortBookings())
     customer.calculateTotalSpent()
     expect(customer.totalSpent).to.equal(638.74)
   })
 
   it('Should filter past/present/future bookings', () => {
+    console.log(customer.pastBookings, 'pastBookings')
     customer.sortBookings()
-    //console.log(customer.pastBookings, 'past')
-    //console.log(customer.presentBooking, 'present')
-    //console.log(customer.futureBookings, 'future')
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    console.log(customer.presentBooking, 'presentbooking')
-    console.log(customer.id, 'ID')
-
-    console.log(hotel.currentCustomer, 'CC')
-    expect(customer.presentBooking[0].id).to.equal('5fwrgu4i7k55hl6te')
+    expect(customer.presentBooking.id).to.equal('5fwrgu4i7k55hl6te')
     expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
   it('Should have methods to return all Bookings', () => {
-    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6t8")
-    expect(customer.getPresentBooking()[0].id).to.equal("")
-    expect(customer.getFutureBookings()[0].id).to.equal("")
+    customer.sortBookings()
+    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6sz")
+    expect(customer.getPresentBooking().id).to.equal('5fwrgu4i7k55hl6te')
+    expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
 })

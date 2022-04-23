@@ -95,7 +95,6 @@ class Hotel {
       return this.currentCustomer.bookings
     }
 
-
     makeBooking(somedata) {
 
     }
