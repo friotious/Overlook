@@ -5,8 +5,6 @@ class Booking {
     this.date = bookingData.date
     this.roomNumber = bookingData.roomNumber
     this.room = {}
-
-
   }
 
   getCost() {

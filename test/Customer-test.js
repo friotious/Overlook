@@ -19,6 +19,10 @@ describe('Customer', () => {
     expect(Customer).to.be.a('function');
   });
 
+  it('Should hold current date', () => {
+    expect(customer.currentDate).to.equal(hotel.getCurrentDate())
+  })
+
   it('Should hold customer data', () => {
     expect(customer.id).to.equal(1)
     expect(customer.name).to.equal("Leatha Ullrich")
@@ -31,15 +35,18 @@ describe('Customer', () => {
   })
 
   it('Should store totalSpent on all rooms', () => {
-    console.log(customer.allBookings[0].room.costPerNight, 'cost')
+    //console.log('test', customer.sortBookings())
     customer.calculateTotalSpent()
     expect(customer.totalSpent).to.equal(638.74)
   })
 
   it('Should filter past/present/future bookings', () => {
     customer.sortBookings()
-    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6t8")
-    expect(customer.presentBooking[0].id).to.equal()
+    console.log(customer.pastBookings, 'past')
+    console.log(customer.presentBooking, 'present')
+    console.log(customer.futureBookings, 'future')
+    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
+    expect(customer.presentBooking[0].id).to.equal('5fwrgu4i7k55hl6te')
     expect(customer.futureBookings[0].id).to.equal()
   })
 
@@ -48,6 +55,5 @@ describe('Customer', () => {
     expect(customer.getPresentBooking()[0].id).to.equal("")
     expect(customer.getFutureBookings()[0].id).to.equal("")
   })
-
 
 })
