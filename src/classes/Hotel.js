@@ -7,9 +7,6 @@ let moment = require('moment')
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
     this.currentDate = 'oops'
-    //this.bookingData = bookingData
-    //this.roomData = roomData
-    //this.customerData = customerData
     this.allBookings = []
     this.allRooms = []
     this.allCustomers = []
@@ -17,16 +14,11 @@ class Hotel {
     this.currentCustomer = {}
     this.getCurrentDate()
     this.updateAllRooms(roomData)
-    //console.log(this.allRooms, 'this.allrooms ?')
     this.updateAllBookings(bookingData)
     this.addRoom()
-    // console.log(this.allBookings, 'this.allbookings = should add room = ?')
     this.updateAllCustomers(customerData)
-    //console.log(this.allCustomers, 'this.allCustomers')
     this.addCurrentCustomer(id)
-    //console.log(this.currentCustomer, 'this.curretnCustomer')
     this.addBookings()
-    //this.addCustomer(id)
   }
 
   updateAllRooms(somedata) {
@@ -52,11 +44,6 @@ class Hotel {
         return booking.userID === customer.id
       })
       customer.allBookings = bookings
-      //console.log(bookings, 'var bookings = array?')
-      // this.currentCustomer.allBookings = bookings
-      //console.log(this.currentCustomer, 'cc')
-      //console.log(this.currentCustomer.allBookings, 'ab')
-
     })
   }
 

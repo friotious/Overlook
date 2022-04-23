@@ -16,7 +16,6 @@ describe('Customer', () => {
   })
 
   it('Should be a function', () => {
-    console.log(dayjs(), 'dayjsformat')
     expect(Customer).to.be.a('function');
   });
 
@@ -41,7 +40,6 @@ describe('Customer', () => {
   })
 
   it('Should filter past/present/future bookings', () => {
-    console.log(customer.pastBookings, 'pastBookings')
     customer.sortBookings()
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
     expect(customer.presentBooking.id).to.equal('5fwrgu4i7k55hl6te')

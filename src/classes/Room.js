@@ -6,11 +6,13 @@ class Room {
     this.bedSize = data.bedSize
     this.numBeds = data.numBeds
     this.costPerNight = data.costPerNight
-    this.nightsBooked = []
   }
+  
+  //-----> maybe make array of Data? <-----------
+      // expect(room.allData[1]).to.deep.equal("single room")
 
   getRoomNumber() {
-    return this.roomNumber
+    return this.number
   }
 
   getRoomType() {

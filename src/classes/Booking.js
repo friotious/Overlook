@@ -8,7 +8,7 @@ class Booking {
   }
 
   getCost() {
-    return this.roomData.costPerNight
+    return this.room.costPerNight
   }
 
   getDate() {
