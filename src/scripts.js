@@ -6,6 +6,11 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-
-
+import datepicker from 'js-datepicker';
+//------
+// make variabel ---
+//const picker = datepicker(input, { alwaysShow: true })
+//  make querySelector for input, next parameter is 'state' of calender
+//  make eventListener for 'click' should return date in some format.
+//----------
 console.log('This is the JavaScript entry file - your code begins here.');
