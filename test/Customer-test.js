@@ -47,11 +47,15 @@ describe('Customer', () => {
     //console.log(customer.presentBooking, 'present')
     //console.log(customer.futureBookings, 'future')
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
+    console.log(customer.presentBooking, 'presentbooking')
+    console.log(customer.id, 'ID')
+
+    console.log(hotel.currentCustomer, 'CC')
     expect(customer.presentBooking[0].id).to.equal('5fwrgu4i7k55hl6te')
-    expect(customer.futureBookings[0].id).to.equal()
+    expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
-  it.skip('Should have methods to return all Bookings', () => {
+  it('Should have methods to return all Bookings', () => {
     expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6t8")
     expect(customer.getPresentBooking()[0].id).to.equal("")
     expect(customer.getFutureBookings()[0].id).to.equal("")

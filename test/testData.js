@@ -62,7 +62,7 @@ const bookings = [
     {
       "id": "5fwrgu4i7k55hl6te",
       "userID": 1,
-      "date": "2022/04/22",
+      "date": "2022/04/23",
       "roomNumber": 8
     },
 ]
