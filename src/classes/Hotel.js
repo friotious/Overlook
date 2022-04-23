@@ -1,6 +1,8 @@
 import Booking from "./Booking.js";
 import Room from "./Room.js";
 import Customer from "./Customer.js";
+var dayjs = require('dayjs')
+let moment = require('moment')
 
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
@@ -68,11 +70,8 @@ class Hotel {
   }
 
   getCurrentDate() {
-      // ---->   input type date in HTML <------//
-    var today = new Date();
-    var date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-    this.currentDate = date
-    return date
+    this.currentDate = moment().format('YYYY/MM/DD');
+    return this.currentDate
   }
 
   getBookingsByID(id) {

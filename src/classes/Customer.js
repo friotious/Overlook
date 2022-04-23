@@ -1,5 +1,6 @@
 import Booking from "./Booking.js";
-
+let dayjs = require('dayjs')
+let moment = require('moment')
 class Customer {
   constructor(data) {
     this.currentDate = ''
@@ -7,7 +8,7 @@ class Customer {
     this.name = data.name
     this.allBookings = []
     this.pastBookings = []
-    this.presentBooking = {}
+    this.presentBooking = []
     this.futureBookings = []
     this.totalSpent = 0
     this.getCurrentDate()
@@ -15,12 +16,11 @@ class Customer {
     // this.updateBookings(bookings)
   }
 
+  // ---->   input type date in HTML <------//
+
   getCurrentDate() {
-      // ---->   input type date in HTML <------//
-    var today = new Date();
-    var date = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-    this.currentDate = date
-    return date
+    this.currentDate = moment().format('YYYY/MM/DD');
+    return this.currentDate
   }
 
   calculateTotalSpent() {
@@ -34,7 +34,7 @@ class Customer {
    sortBookings() {
      let past = this.allBookings.filter(booking => booking.date < this.currentDate)
      this.pastBookings = past
-     
+
      let present = this.allBookings.filter(booking => booking.date === this.currentDate)
      this.presentBooking = present
      let future = this.allBookings.filter(booking => booking.date > this.currentDate)

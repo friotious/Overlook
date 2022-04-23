@@ -27,9 +27,19 @@
     "start": "webpack serve",
     "build": "webpack",
     "test": "mochapack 'test/**/*.js'",
-    "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
+    "lint": "eslint 'src/**.js' 'test/**.js'"
   },
   "dependencies": {
-    "js-datepicker": "^5.18.0"
-  }
+    "dayjs": "^1.11.1",
+    "js-datepicker": "^5.18.0",
+    "moment": "^2.29.3"
+  },
+  "bugs": {
+    "url": "https://github.com/turingschool-examples/webpack-starter-kit/issues"
+  },
+  "homepage": "https://github.com/turingschool-examples/webpack-starter-kit#readme",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
 }

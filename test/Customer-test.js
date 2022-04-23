@@ -5,7 +5,7 @@ import { bookings, rooms, customers} from './testData.js'
 import Customer from '../src/classes/Customer.js';
 import Booking from '../src/classes/Booking.js';
 import Hotel from '../src/classes/Hotel.js';
-
+var dayjs = require('dayjs')
 describe('Customer', () => {
   let hotel
   let customer
@@ -16,6 +16,7 @@ describe('Customer', () => {
   })
 
   it('Should be a function', () => {
+    console.log(dayjs(), 'dayjsformat')
     expect(Customer).to.be.a('function');
   });
 
@@ -42,9 +43,9 @@ describe('Customer', () => {
 
   it('Should filter past/present/future bookings', () => {
     customer.sortBookings()
-    console.log(customer.pastBookings, 'past')
-    console.log(customer.presentBooking, 'present')
-    console.log(customer.futureBookings, 'future')
+    //console.log(customer.pastBookings, 'past')
+    //console.log(customer.presentBooking, 'present')
+    //console.log(customer.futureBookings, 'future')
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
     expect(customer.presentBooking[0].id).to.equal('5fwrgu4i7k55hl6te')
     expect(customer.futureBookings[0].id).to.equal()
