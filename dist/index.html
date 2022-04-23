@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overlook</title>
-</head>
-<body>
-  <nav>
-    <section>
-      <p class="home">Home</p>
-    </section>
-    <section>
-      <p class="title">OverLook Hotel</p>
-    </section>
-    <section>
-      <p class="user">User Data</p>
-    </section>
-  </nav>
-  <main>
-    <aside>AsideBar
-    </aside>
-  <section class="main-info"> main booking info </section>
-  </main>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overlook</title>
+  </head>
 
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+  <body>
+      <nav>
+          <section>
+              <p class="home">Home</p>
+          </section>
+          <section>
+              <p class="title">OverLook Hotel</p>
+          </section>
+          <section>
+              <p class="user">User Data</p>
+          </section>
+      </nav>
+      <main>
+          <aside>AsideBar</aside>
+          <section class="main-info scrollable">main booking info
+              <section class="customer-bookings-data">
+              </section>
+          </section>
+      </main>
+    <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
 
-</body>
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
 </html>
