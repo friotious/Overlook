@@ -2,3 +2,59 @@ body {
   background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
 }
 @import '~js-datepicker/dist/datepicker.min.css';
+
+* {
+  border: 1px solid black;
+}
+
+/* < _____________ > NAV < ____________________ > */
+
+nav {
+  display: flex;
+  height: 20vh;
+  width: 100vw;
+  justify-content: space-between;
+}
+
+.home {
+  width: 15vw;
+  height: 20vh;
+}
+
+.title {
+  width: 30vw;
+  height: 20vh;
+}
+
+.user {
+  width: 25vw;
+  height: 20vh;
+}
+
+
+
+
+/* < _____________ > MAIN SECTION < ____________________ > */
+
+main {
+  display: flex;
+  width: 100vw;
+  height: 80vh;
+}
+
+/* < _____________ > SIDEBAR < ____________________ > */
+
+
+aside {
+  width: 15vw;
+  height: 80vh;
+}
+
+.main-info {
+  width: 85vw;
+  height: 80vh;
+}
+
+body {
+  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
+}
