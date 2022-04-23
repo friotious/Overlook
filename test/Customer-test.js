@@ -31,11 +31,12 @@ describe('Customer', () => {
   })
 
   it('Should store totalSpent on all rooms', () => {
-    calculateTotalSpent()
-    expect(customer.totalSpent).to.equal()
+    console.log(customer.allBookings[0].room.costPerNight, 'cost')
+    customer.calculateTotalSpent()
+    expect(customer.totalSpent).to.equal(638.74)
   })
 
-  it.skip('Should filter past/present/future bookings', () => {
+  it('Should filter past/present/future bookings', () => {
     customer.sortBookings()
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6t8")
     expect(customer.presentBooking[0].id).to.equal()

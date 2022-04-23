@@ -1,7 +1,7 @@
 import Booking from "./Booking.js";
 
 class Customer {
-  constructor(data) {
+  constructor(data, date) {
     this.id = data.id
     this.name = data.name
     this.allBookings = []
@@ -9,11 +9,16 @@ class Customer {
     // this.updateBookings(bookings)
   }
 
-  getTotalSpent() {
-    this.allBookings.forEach(booking => {
+  calculateTotalSpent() {
+    console.log(this.allBookings, 'allbookings')
+     this.allBookings.forEach(booking => {
+       if(booking.room && booking.room.costPerNight) {
+         this.totalSpent += booking.room.costPerNight
+    }
+  })
+}
 
-    })
-  }
+
 
   // updateBookings(somedata) {
   //   somedata.filter(booking => booking.userID === this.id)
