@@ -2,7 +2,7 @@ const bookings = [
     {
       "id": "5fwrgu4i7k55hl6sz",
       "userID": 1,
-      "date": "2022/04/22",
+      "date": "2022/05/29",
       "roomNumber": 15
     },
     {
@@ -61,8 +61,8 @@ const bookings = [
     },
     {
       "id": "5fwrgu4i7k55hl6te",
-      "userID": 44,
-      "date": "2022/01/19",
+      "userID": 1,
+      "date": "2022/04/23",
       "roomNumber": 8
     },
 ]
@@ -123,6 +123,5 @@ const rooms = [
       "numBeds": 1,
       "costPerNight": 294.56
     },
-
   ]
   export { bookings, customers, rooms}
