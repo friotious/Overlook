@@ -7,30 +7,13 @@ let moment = require('moment')
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
     this.currentDate = moment().format('YYYY/MM/DD');
-    this.allBookings = []
-    this.allRooms = []
-    this.allCustomers = []
+    this.allBookings = bookingData.map(booking => new Booking(booking))
+    this.allRooms = roomData.map(room => new Room(room))
+    this.allCustomers = customerData.map(customer => new Customer(customer))
     this.currentCustomerID = id
     this.currentCustomer = {}
-    this.getCurrentDate()
-    this.updateAllRooms(roomData)
-    this.updateAllBookings(bookingData)
     this.addRoom()
-    this.updateAllCustomers(customerData)
-    this.addCurrentCustomer(id)
     this.addBookings()
-  }
-
-  updateAllRooms(somedata) {
-    somedata.forEach(room => this.allRooms.push(new Room(room)))
-  }
-
-  updateAllBookings(somedata) {
-    somedata.forEach(booking => this.allBookings.push(new Booking(booking)))
-  }
-
-  updateAllCustomers(somedata) {
-    somedata.forEach(customer => this.allCustomers.push(new Customer(customer)))
   }
 
   addCurrentCustomer(id) {
@@ -54,11 +37,6 @@ class Hotel {
       })
       booking.room = room
     })
-  }
-
-  getCurrentDate() {
-    this.currentDate = moment().format('YYYY/MM/DD');
-    return this.currentDate
   }
 
   getBookingsByID(id) {

@@ -8,9 +8,6 @@ class Room {
     this.costPerNight = data.costPerNight
   }
   
-  //-----> maybe make array of Data? <-----------
-      // expect(room.allData[1]).to.deep.equal("single room")
-
   getRoomNumber() {
     return this.number
   }
