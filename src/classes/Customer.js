@@ -1,6 +1,7 @@
 import Booking from "./Booking.js";
 let dayjs = require('dayjs')
 let moment = require('moment')
+
 class Customer {
   constructor(data) {
     this.currentDate = ''
@@ -8,7 +9,6 @@ class Customer {
     this.name = data.name
     this.allBookings = []
     this.pastBookings = ''
-    this.presentBooking = ''
     this.futureBookings = ''
     this.totalSpent = 0
     this.getCurrentDate()
@@ -23,20 +23,34 @@ class Customer {
   }
 
   sortBookings() {
-    let past = this.allBookings.filter(booking => booking.date < this.currentDate)
+    let sortAll = this.allBookings.sort((a, b) => {
+      return a.date.split('/').join('') - b.date.split('/').join('')
+    })
+    let past = sortAll.filter(booking => booking.date.split('/').join('') < this.currentDate.split('/').join(''))
     this.pastBookings = past
-    let present = this.allBookings.filter(booking => booking.date === this.currentDate).pop()
-    this.presentBooking = present
-    let future = this.allBookings.filter(booking => booking.date > this.currentDate)
+    let future = sortAll.filter(booking => booking.date.split('/').join('') >= this.currentDate.split('/').join(''))
     this.futureBookings = future
   }
 
+  sortByDate(bookings) {
+
+  }
+
+
+
+
+// //const Moment = require('moment')
+// const array = [{date:"2018-05-11"},{date:"2018-05-12"},{date:"2018-05-10"}]
+// const sortedArray  = array.sort((a,b) => new Moment(a.date).format('YYYYMMDD') - new Moment(b.date).format('YYYYMMDD'))
+
   calculateTotalSpent() {
+    this.totalSpent = 0
      this.allBookings.forEach(booking => {
        if(booking.room && booking.room.costPerNight) {
          this.totalSpent += booking.room.costPerNight
        }
      })
+     return this.totalSpent
    }
 
    getAllBookings() {

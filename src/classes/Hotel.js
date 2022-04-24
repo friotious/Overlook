@@ -6,7 +6,7 @@ let moment = require('moment')
 
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
-    this.currentDate = 'oops'
+    this.currentDate = moment().format('YYYY/MM/DD');
     this.allBookings = []
     this.allRooms = []
     this.allCustomers = []

@@ -42,14 +42,12 @@ describe('Customer', () => {
   it('Should filter past/present/future bookings', () => {
     customer.sortBookings()
     expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.presentBooking.id).to.equal('5fwrgu4i7k55hl6te')
     expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
   it('Should have methods to return all Bookings', () => {
     customer.sortBookings()
     expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.getPresentBooking().id).to.equal('5fwrgu4i7k55hl6te')
     expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6t5')
   })
 

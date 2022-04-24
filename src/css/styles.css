@@ -1,5 +1,5 @@
 
-@import '~js-datepicker/dist/datepicker.min.css';
+/* @import '~js-datepicker/dist/datepicker.min.css'; */
 
 * {
   border: 1px solid black;
@@ -24,9 +24,16 @@ nav {
   height: 20vh;
 }
 
-.user {
+.user-data-box {
+  display: flex;
+  flex-direction: column;
   width: 15vw;
   height: 20vh;
+
+}
+#totalSpent,
+#userName {
+  background-color: pink;
 }
 
 /* ______________ > Calender/Date selection/filter Sidebar < ______ > */
@@ -52,9 +59,20 @@ aside {
 }
 
 .customer-bookings-data {
-  background-color: pink;
+  background-color: #f7f4ea;
+  height: 100vh;
+  width: 85vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 450px;
+  padding: 10px;
 }
 
+.future-booking-card,
+.past-booking-card {
+  display: flex;
+  flex-direction: column;
+}
 
 main {
   display: flex;
@@ -62,11 +80,11 @@ main {
   height: 80vh;
 }
 
-.scrollable {
+/* .scrollable {
   height: 80%;
   overflow: auto;
   background-color: white;
-}
+} */
 
 
 
