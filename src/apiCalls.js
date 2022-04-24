@@ -22,7 +22,7 @@ const customers = fetch("http://localhost:3001/api/v1/customers")
 const rooms = fetch("http://localhost:3001/api/v1/rooms")
   .then(response => {
     if (response.ok) {
-      return response.json()
+      return response.json() 'winning!'
     } else {
       throw Error(response.statusText)
     }
