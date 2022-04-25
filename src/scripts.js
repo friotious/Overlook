@@ -20,8 +20,11 @@ let moment = require('moment')
 let spent = document.querySelector('#totalSpent')
 let userName = document.querySelector('#userName')
 let ccBookings = document.querySelector('.customer-bookings-data')
+let availRooms = document.querySelector('.available-rooms-data')
 let currentCustomer = document.querySelector('#userName')
 let totalSpent = document.querySelector('#totalSpent')
+let calendar = document.getElementById('calendarDate')
+let checkAvailabilityBtn = document.getElementById('checkAvailability')
 let hotel
 let customer
 
@@ -59,12 +62,47 @@ function displayCCBookings() {
   })
 }
 
-Promise.all([bookings, rooms, customers]).then((values) => {
-  hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers);
-  hotel.addCurrentCustomer(1)
-  customer = hotel.currentCustomer
-  customer.sortBookings()
-  displayCCBookings()
-  displayUserName()
-  displaySpent()
-});
+// if (room.numbeds > 1) {
+//
+// }
+//
+function capitalize(s) {
+  return s[0].toUpperCase() + s.slice(1);
+}
+
+calendar.addEventListener('change', () => {
+  ccBookings.classList.add('hidden')
+  displayAvailableRooms(moment(calendar.value).format('YYYY/MM/DD'))
+  availRooms.classList.remove('hidden')
+})
+
+function displayAvailableRooms(date) {
+  let rooms = hotel.getAvailRooms(date)
+  availRooms.innerHTML = ''
+  rooms.forEach(room => {
+    availRooms.innerHTML +=
+    `<p>Rooms avilable on ${calendarDate.value}</p>
+      <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
+      <ul>Beds: ${room.numBeds} </ul>
+      <ul>Bed size: ${capitalize(room.bedSize)}</ul>
+      <ul>Cost: $${room.costPerNight}</ul>`
+
+  })
+}
+
+
+window.onload = (event) => {
+  Promise.all([bookings(), rooms(), customers()]).then((values) => {
+    hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers)
+    hotel.addRoom()
+    hotel.addBookings()
+    hotel.addCurrentCustomer(1)
+    customer = hotel.currentCustomer
+    customer.sortBookings()
+    displayCCBookings()
+    displayUserName()
+    displaySpent()
+    //calendarToday.value = moment().format('YYYY/MM/DD')
+    //calendar.min = moment().format('YYYY-MM-DD')
+  });
+};
