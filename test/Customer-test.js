@@ -10,14 +10,14 @@ var dayjs = require('dayjs')
 describe('Customer', () => {
   let hotel
   let customer
-  let date
+
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms, customers, 1)
     hotel.addRoom()
     hotel.addBookings()
     hotel.addCurrentCustomer(1)
     customer = hotel.currentCustomer
-    date = moment().format('YYYY/MM/DD')
+
   })
 
   it('Should be a function', () => {
@@ -25,6 +25,7 @@ describe('Customer', () => {
   });
 
   it('Should hold current date', () => {
+    let date = moment().format('YYYY/MM/DD')
     expect(customer.currentDate).to.equal(date)
   })
 
