@@ -1,5 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
+let moment = require('moment')
 
 import { bookings, rooms, customers} from './testData.js'
 import Customer from '../src/classes/Customer.js';
@@ -9,46 +10,50 @@ var dayjs = require('dayjs')
 describe('Customer', () => {
   let hotel
   let customer
-
+  let date
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms, customers, 1)
+    hotel.addRoom()
+    hotel.addBookings()
+    hotel.addCurrentCustomer(1)
     customer = hotel.currentCustomer
+    date = moment().format('YYYY/MM/DD')
   })
 
-  it.skip('Should be a function', () => {
+  it('Should be a function', () => {
     expect(Customer).to.be.a('function');
   });
 
-  it.skip('Should hold current date', () => {
-    expect(customer.currentDate).to.equal(hotel.getCurrentDate())
+  it('Should hold current date', () => {
+    expect(customer.currentDate).to.equal(date)
   })
 
-  it.skip('Should hold customer data', () => {
+  it('Should hold customer data', () => {
     expect(customer.id).to.equal(1)
     expect(customer.name).to.equal("Leatha Ullrich")
   })
 
-  it.skip('Should be able to hold its bookings', () => {
+  it('Should be able to hold its bookings', () => {
     expect(customer.allBookings[0]).to.be.a.instanceOf(Booking)
     let sameID = customer.allBookings.map(booking => booking.userID)
     expect(sameID.every(id => id === 1))
   })
 
-  it.skip('Should store totalSpent on all rooms', () => {
+  it('Should store totalSpent on all rooms', () => {
     customer.calculateTotalSpent()
     expect(customer.totalSpent).to.equal(638.74)
   })
 
-  it.skip('Should filter past/present/future bookings', () => {
+  it('Should filter past and future bookings and store them', () => {
     customer.sortBookings()
-    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6t5')
+    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6t6")
+    expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6sz')
   })
 
-  it.skip('Should have methods to return all Bookings', () => {
+  it('Should have methods to return all Bookings', () => {
     customer.sortBookings()
-    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6t5')
+    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6t6")
+    expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6sz')
   })
 
 })
