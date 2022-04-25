@@ -9,33 +9,25 @@ import Hotel from './classes/Hotel.js';
 import datepicker from 'js-datepicker';
 let moment = require('moment')
 
-//------ HTML date element use onkeydown="return false" to prevent typing
-// make variabel ---
-//const picker = datepicker(input, { alwaysShow: true })
+//------
+//  const picker = datepicker(input, { alwaysShow: true })
 //  make querySelector for input, next parameter is 'state' of calender
 //  make eventListener for 'click' should return date in some format.
 //----------
-//
+
 //<-----QUERY SELECTORS-------------------------->///////////
-//
-//query select submitButton
-// button has conditional to check value of calenderToday
-// if roomtype === 'pick a room' then ONLY filter  by date,
-// else, filter by date, THEN filter that by roomType,
-// THEN display
 
 
 
-let spent = document.querySelector('#totalSpent')
-let userName = document.querySelector('#userName')
+let userName = document.getElementById('userName')
+let spent = document.getElementById('totalSpent')
 let ccBookings = document.querySelector('.customer-bookings-data')
 let availRooms = document.querySelector('.available-rooms-data')
-let currentCustomer = document.querySelector('#userName')
-let totalSpent = document.querySelector('#totalSpent')
+let calendarBox = document.getElementById('calendarBox')
 let calendar = document.getElementById('calendarDate')
 let submitButton = document.getElementById('submitButton')
 let roomInputBox = document.getElementById('roomInputBox')
-// let checkAvailabilityBtn = document.getElementById('checkAvailability')
+let dateInputError = document.getElementById('dateInputError')
 let roomSelection = document.getElementById("roomTypes")
 let hotel
 let customer
@@ -79,41 +71,43 @@ function capitalize(s) {
   return s[0].toUpperCase() + s.slice(1);
 }
 
-// roomSelection.addEventListener('onclick', () => {
-//
-//   ccBookings.classList.add('hidden')
-//   let roomsByType = hotel.getRoomsByType(roomSelection.value)
-//   roomSelection.value// === 'Choose a Room' then run displayAvailableRooms(date)
-// // if roomASelction.value === anything else, take that value and filter
-//
-//   //when clicked, we want to filter out rooms that match this Value and return them?
-//   //
-//
-//   // if
-// })
-
 
 roomInputBox.addEventListener('input', (e) => {
-    handleFormInput(e)
+  dateInputError.classList.add('hidden')
+  checkForDate(e)
+  filterFormInput(e)
 })
 
-let handleFormInput = (e) => {
+let filterFormInput = (e) => {
   let date = moment(calendar.value).format('YYYY/MM/DD')
-  console.log(date, 'date') // available rooms fil
-    if (e.target.id === 'calendarDate') {
-      roomSelection.disabled = false;
-      ccBookings.classList.add('hidden')
-      hotel.getAvailRoomsByDate(date)
-      displayAvailableRooms()
-      availRooms.classList.remove('hidden')
-    } else if (e.target.id === 'roomTypes') {
-      console.log(e.target.id, 'id', e.target.value, 'value')
-      hotel.getAvailRoomsByDate(date)
-      hotel.getAvailRoomsByType(e.target.value)
-      displayAvailableRooms()
-         //<-----Avalable
-    }
+  if (!checkForDate(e)) {
+    return
+  } else if (e.target.id === 'calendarDate' && checkForDate(e)) {
+    roomSelection.disabled = false;
+    ccBookings.classList.add('hidden')
+    hotel.getAvailRoomsByDate(date)
+    displayAvailableRooms()
+    availRooms.classList.remove('hidden')
+  } else if (e.target.id === 'roomTypes') {
+    console.log(e.target.id, 'id', e.target.value, 'value')
+    hotel.getAvailRoomsByDate(date)
+    hotel.getAvailRoomsByType(e.target.value)
+    displayAvailableRooms()
+    //<-----Avalable
+  }
 }
+
+let checkForDate = (e) => {
+  if (e.target.value.slice(-10, -6) != '2022' || '2023') {
+    dateInputError.classList.remove('hidden')
+    return false
+  } else {
+    return true
+  }
+
+}
+
+
 // submitButton.addEventListener('click', () => {
 //   console.log(roomSelection.value, 'roomValue')
 //   if (roomSelection.value === 'Choose a roomtype') {
@@ -147,7 +141,7 @@ function displayAvailableRooms() {
   availRooms.innerHTML = ''
   rooms.forEach(room => {
     availRooms.innerHTML +=
-    `<p id='room${room.number}'>Rooms avilable on ${calendarDate.value}</p>
+      `<p id='room${room.number}'>Rooms avilable on ${calendarDate.value}</p>
       <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
       <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
       <ul>Beds: ${room.numBeds} </ul>
@@ -155,7 +149,6 @@ function displayAvailableRooms() {
       <ul>Cost: $${room.costPerNight}</ul>`
   })
 }
-
 
 window.onload = (event) => {
   Promise.all([bookings(), rooms(), customers()]).then((values) => {
@@ -168,6 +161,8 @@ window.onload = (event) => {
     displayCCBookings()
     displayUserName()
     displaySpent()
+    calendar.max = '2023-12-31'
+    calendar.min = moment().format('YYYY-MM-DD')
     calendar.value = moment().format('YYYY-MM-DD');
   });
 };

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Overlook</title>
   </head>
-
   <body>
       <nav class="">
           <section class="home">
@@ -24,9 +23,9 @@
           <aside>
             <form id='roomInputBox'>
               <h2>Booking Calender</h2>
-              <div class="calendar-box">
+              <div class="calendar-box" id="calendarBox">
                   <label class="calendar-label" for="calendar-start"></label>
-                  <input class="calendar-date-input" type="date" id="calendarDate" onkeydown="return false" value="" name="calendar">
+                  <input class="calendar-date-input" type="date" id="calendarDate"  value="" name="calendar" required pattern>
                   <label class="room-types-label" for="room-select">Room Types:</label>
                   <select class"room-select" name='roomtypes'  id="roomTypes" disabled>
                       <option class="roomtype-selected" name="roomtypes" value="Choose a roomtype">Choose a roomtype</option>
@@ -35,7 +34,7 @@
                       <option class="roomtype-selected" name="roomtypes" value="junior suite">junior suite</option>
                       <option class="roomtype-selected" name="roomtypes" value="single room">single room</option>
                   </select>
-                  <!-- <button class="submit-button" id="submitButton" type="button" value"Submit">Submit</button> -->
+                  <div id="dateInputError" class="date-input-error hidden">Please input a valid Date</div>
               </div>
               </form>
           </aside>
