@@ -99,13 +99,19 @@ roomInputBox.addEventListener('input', (e) => {
 
 let handleFormInput = (e) => {
   let date = moment(calendar.value).format('YYYY/MM/DD')
+  console.log(date, 'date') // available rooms fil
     if (e.target.id === 'calendarDate') {
       roomSelection.disabled = false;
       ccBookings.classList.add('hidden')
-      displayAvailableRooms(date)
+      hotel.getAvailRoomsByDate(date)
+      displayAvailableRooms()
       availRooms.classList.remove('hidden')
     } else if (e.target.id === 'roomTypes') {
-      hotel.getAvailRooms(date)    //<-----Avalable
+      console.log(e.target.id, 'id', e.target.value, 'value')
+      hotel.getAvailRoomsByDate(date)
+      hotel.getAvailRoomsByType(e.target.value)
+      displayAvailableRooms()
+         //<-----Avalable
     }
 }
 // submitButton.addEventListener('click', () => {
@@ -127,15 +133,17 @@ let handleFormInput = (e) => {
 //
 // })
 
-
+// function displayAvailableRooms() {
+//   availRooms.innerHTML = ''
+//
+// }
 
 
 
 
 //'rooms', rooms)
-function displayAvailableRooms(date) {
-  let rooms = hotel.getAvailRooms(date)//.filter(room => room.roomType === roomSelection.value)
-  // console.log(roomSelection.value, 'room select')
+function displayAvailableRooms() {
+  let rooms = hotel.availableRooms
   availRooms.innerHTML = ''
   rooms.forEach(room => {
     availRooms.innerHTML +=
@@ -146,7 +154,6 @@ function displayAvailableRooms(date) {
       <ul>Bed size: ${capitalize(room.bedSize)}</ul>
       <ul>Cost: $${room.costPerNight}</ul>`
   })
-
 }
 
 

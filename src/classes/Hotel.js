@@ -15,12 +15,13 @@ class Hotel {
     this.availableRooms;
   }
 
-  getRoomsByType(rooms, roomType) {
-    return [rooms].filter(room => room.roomType === roomType)
+  getAvailRoomsByType(roomType) {
+    this.availableRooms = this.availableRooms.filter(room => room.roomType === roomType)
+    return this.availableRooms
   }
 
-  getAvailRooms(date) {
-    console.log(this.availableRooms, this.allRooms, 'allROomms')
+  getAvailRoomsByDate(date) {
+    console.log(this.availableRooms, 'this.availableRooms', this.allRooms, 'this.allROomms')
     this.availableRooms = this.allRooms
     let notAvailable = this.allBookings.filter(booking => {
       return booking.date === date}).map(booking => booking.roomNumber)
@@ -28,7 +29,6 @@ class Hotel {
         return this.availableRooms
       } else if (notAvailable[0]) {
           this.availableRooms = this.availableRooms.filter(room => !notAvailable.includes(room.number))
-          console.log(this.availableRooms, 'availableRooms')
           return this.availableRooms
       }
   }
