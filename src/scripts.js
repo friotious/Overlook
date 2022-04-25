@@ -51,7 +51,7 @@ function displayCCBookings() {
       `<div class="past-booking-card" >
         <ul>You Stayed here on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
-        <ul>${booking.getRoom()}</ul>
+        <ul>${booking.roomNumber}</ul>
         <ul>${booking.getBed()}</ul>
       </div>`
   })
@@ -61,7 +61,7 @@ function displayCCBookings() {
       `<div class="future-booking-card" >
         <ul>You're booked on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
-        <ul>${booking.getRoom()}</ul>
+        <ul>${booking.roomNumber}</ul>
         <ul>${booking.getBed()}</ul>
     </div>`
   })

@@ -31,6 +31,6 @@ class Room {
   getCostPerNight() {
     return this.costPerNight
   }
-
 }
+
 export default Room;
