@@ -51,6 +51,57 @@ h2 {
   font-size: 50;
 }
 
+.calendar-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-date-input {
+  height: 30px;
+}
+
+.calendar-label {
+
+  /* height: 35px; */
+}
+
+.room-types-label {
+  font-size: 24px;
+  height: 24px;
+}
+
+.roomtype-selected {
+
+}
+
+.submit-button {
+  background-color: #E6D5AA;
+  border: none;
+  color: black;
+  padding: 25px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #E6DABE;
+  border: none;
+  color: #685D5D ;
+  padding: 25px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 24.5px;
+  cursor: pointer;
+}
+
+
+
+/* .room-select {
+  height: 55px;
+} */
+
 #calenderToday {
 
 }
@@ -76,7 +127,7 @@ main {
   height: 80vh;
 }
 
-.available-header {
+.available-title {
 font-size: 16px;
 }
 

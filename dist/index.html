@@ -8,9 +8,9 @@
   </head>
 
   <body>
-      <nav>
+      <nav class="">
           <section class="home">
-              <p >Home</p>
+              <p>Home</p>
           </section>
           <section class="title">
               <h1>OverLook Hotel</h1>
@@ -20,20 +20,31 @@
               <p id="totalSpent"="">$pent</p>
           </section>
       </nav>
-      <main>
+      <main class="">
           <aside>
-            <h2>Booking Calender</h2>
-            <div class="calendar">
-              <label for="calendar-start"></label>
-              <input type="date" id="calendarDate" onkeydown="return false" name="trip-start" min="" max="2023-12-31" required>
-              <!-- <button class="active" id='checkAvailability'>Find Room</button> -->
+            <form id='roomInputBox'>
+              <h2>Booking Calender</h2>
+              <div class="calendar-box">
+                  <label class="calendar-label" for="calendar-start"></label>
+                  <input class="calendar-date-input" type="date" id="calendarDate" onkeydown="return false" value="" name="calendar">
+                  <label class="room-types-label" for="room-select">Room Types:</label>
+                  <select class"room-select" name='roomtypes'  id="roomTypes" disabled>
+                      <option class="roomtype-selected" name="roomtypes" value="Choose a roomtype">Choose a roomtype</option>
+                      <option class="roomtype-selected" name="roomtypes" value="residential suite">residential suite</option>
+                      <option class="roomtype-selected" name="roomtypes" value="suite">suite</option>
+                      <option class="roomtype-selected" name="roomtypes" value="junior suite">junior suite</option>
+                      <option class="roomtype-selected" name="roomtypes" value="single room">single room</option>
+                  </select>
+                  <!-- <button class="submit-button" id="submitButton" type="button" value"Submit">Submit</button> -->
+              </div>
+              </form>
           </aside>
           <section class="main-info-window">
-              <section class="customer-bookings-data scrollable">
-              </section>
+              <div class="customer-bookings-data scrollable">
+              </div>
               <p class="available-title hidden">Available Rooms...</p>
-              <section class='available-rooms-data hidden scrollable'>
-              </section>
+              <div class='available-rooms-data hidden scrollable'>
+              </div>
           </section>
       </main>
     <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->

@@ -12,18 +12,24 @@ class Hotel {
     this.allCustomers = customerData.map(customer => new Customer(customer))
     this.currentCustomerID = id
     this.currentCustomer = {}
+    this.availableRooms;
+  }
+
+  getRoomsByType(rooms, roomType) {
+    return [rooms].filter(room => room.roomType === roomType)
   }
 
   getAvailRooms(date) {
-    console.log(date, 'date')
+    console.log(this.availableRooms, this.allRooms, 'allROomms')
+    this.availableRooms = this.allRooms
     let notAvailable = this.allBookings.filter(booking => {
       return booking.date === date}).map(booking => booking.roomNumber)
-      //console.log(notAvailable, 'room numbers')
       if(!notAvailable[0]) {
-        console.log('test', this.allRooms)
-        return this.allRooms
+        return this.availableRooms
       } else if (notAvailable[0]) {
-          return this.allRooms.filter(room => !notAvailable.includes(room.number))
+          this.availableRooms = this.availableRooms.filter(room => !notAvailable.includes(room.number))
+          console.log(this.availableRooms, 'availableRooms')
+          return this.availableRooms
       }
   }
 
