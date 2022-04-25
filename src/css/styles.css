@@ -24,6 +24,11 @@ nav {
   height: 20vh;
 }
 
+h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
 .user-data-box {
   display: flex;
   flex-direction: column;
@@ -42,11 +47,24 @@ aside {
   height: 80vh;
 }
 
+h2 {
+  font-size: 50;
+}
+
+#calenderToday {
+
+}
+
 /* < _____________ > Room/Bookings display Section < ____________________ > */
 
+main {
+  display: flex;
+  width: 100vw;
+  height: 80vh;
+}
 
 
-.main-info {
+.main-info-window {
   /* height: 88%;
   width: 100%; */
   display: grid;
@@ -58,15 +76,21 @@ aside {
   height: 80vh;
 }
 
+.available-header {
+font-size: 16px;
+}
+
+.available-rooms-data,
 .customer-bookings-data {
   background-color: #f7f4ea;
   height: 100vh;
   width: 85vw;
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 450px;
+  /* max-height: 450px; */
   padding: 10px;
 }
+
 
 .future-booking-card,
 .past-booking-card {
@@ -74,11 +98,6 @@ aside {
   flex-direction: column;
 }
 
-main {
-  display: flex;
-  width: 100vw;
-  height: 80vh;
-}
 
 /* .scrollable {
   height: 80%;
@@ -86,7 +105,9 @@ main {
   background-color: white;
 } */
 
-
+.hidden {
+  display: none;
+}
 
 
 body {

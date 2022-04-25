@@ -1,15 +1,5 @@
-const bookings = fetch("http://localhost:3001/api/v1/bookings")
-  .then(response => {
-    console.log(response, 'response')
-    if (response.ok) {
-      return response.json()
-    } else {
-      throw Error(response.statusText)
-    }
-  }).then(data => data)
-  .catch(err => console.log(err))
-
-const customers = fetch("http://localhost:3001/api/v1/customers")
+const bookings = () => {
+  return fetch("http://localhost:3001/api/v1/bookings")
   .then(response => {
     if (response.ok) {
       return response.json()
@@ -18,17 +8,31 @@ const customers = fetch("http://localhost:3001/api/v1/customers")
     }
   }).then(data => data)
   .catch(err => console.log(err))
+}
 
-const rooms = fetch("http://localhost:3001/api/v1/rooms")
+const customers = () => {
+  return fetch("http://localhost:3001/api/v1/customers")
   .then(response => {
     if (response.ok) {
-      return response.json() 'winning!'
+      return response.json()
     } else {
       throw Error(response.statusText)
     }
   }).then(data => data)
   .catch(err => console.log(err))
+}
 
+const rooms = () => {
+  return fetch("http://localhost:3001/api/v1/rooms")
+  .then(response => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw Error(response.statusText)
+    }
+  }).then(data => data)
+  .catch(err => console.log(err))
+}
 // const bookingPost = (bookingdata) => fetch("http://localhost:3001/api/v1/bookings", {
 // method: "POST",
 // body: JSON.stringify({
