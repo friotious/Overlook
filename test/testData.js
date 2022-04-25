@@ -123,5 +123,13 @@ const rooms = [
       "numBeds": 1,
       "costPerNight": 294.56
     },
+    {
+      "number": '',
+      "roomType": '',
+      "bidet": '',
+      "bedSize": '',
+      "numBeds": '',
+      "costPerNight": ''
+    }
   ]
   export { bookings, customers, rooms}

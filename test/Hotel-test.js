@@ -14,29 +14,29 @@ describe('Hotel', () => {
     hotel = new Hotel(bookings, rooms, customers, 1 )
   })
 
-  it('Should be a function', () => {
+  it.skip('Should be a function', () => {
     expect(Hotel).to.be.a('function');
   });
 
-  it('Should have the current date', () => {
+  it.skip('Should have the current date', () => {
     let date = moment().format('YYYY/MM/DD')
     hotel.getCurrentDate()
     expect(hotel.currentDate).to.equal(date)
   })
 
-  it('Should add/hold currentCustomer ID', () => {
+  it.skip('Should add/hold currentCustomer ID', () => {
     expect(hotel.currentCustomer.id).to.equal(1)
   })
 
-  it('Should have a method to instanciate allCustomers', () => {
+  it.skip('Should have a method to instanciate allCustomers', () => {
     expect(hotel.allCustomers[0]).to.be.an.instanceOf(Customer)
   })
 
-  it('Should have a method to instanciate allRooms', () => {
+  it.skip('Should have a method to instanciate allRooms', () => {
     expect(hotel.allRooms[0]).to.be.an.instanceOf(Room)
   })
 
-  it('Should have a method to instanciate allBookings', () => {
+  it.skip('Should have a method to instanciate allBookings', () => {
     expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 
