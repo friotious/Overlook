@@ -3,7 +3,8 @@ import './css/styles.css';
 import {
   bookings,
   customers,
-  rooms
+  rooms,
+  bookingPost
 } from './apiCalls.js'
 import Hotel from './classes/Hotel.js';
 import datepicker from 'js-datepicker';
@@ -17,33 +18,31 @@ let moment = require('moment')
 
 //<-----QUERY SELECTORS-------------------------->///////////
 
-
-
 let userName = document.getElementById('userName')
 let spent = document.getElementById('totalSpent')
-let ccBookings = document.querySelector('.customer-bookings-data')
-let availRooms = document.querySelector('.available-rooms-data')
+let ccBookings = document.getElementById('customerBookingsData')
+let availRooms = document.getElementById('availableRoomsData')
 let calendarBox = document.getElementById('calendarBox')
 let calendar = document.getElementById('calendarDate')
 let submitButton = document.getElementById('submitButton')
 let roomInputBox = document.getElementById('roomInputBox')
 let dateInputError = document.getElementById('dateInputError')
 let roomSelection = document.getElementById("roomTypes")
+let availableRoomsPage = document.getElementById("availableRoomsPage")
 let hotel
 let customer
 
-
 function displayUserName() {
-  userName.innerText = hotel.currentCustomer.name
+  userName.innerText = customer.name
 }
 
 function displaySpent() {
-  spent.innerText = hotel.currentCustomer.calculateTotalSpent()
+  spent.innerText = customer.calculateTotalSpent()
 }
 
 function displayCCBookings() {
-  let past = hotel.currentCustomer.getPastBookings()
-  let future = hotel.currentCustomer.getFutureBookings()
+  let past = customer.getPastBookings()
+  let future = customer.getFutureBookings()
   ccBookings.innerHTML = ''
   //Display past bookings
   past.forEach(booking => {
@@ -55,7 +54,6 @@ function displayCCBookings() {
         <ul>${booking.getBed()}</ul>
       </div>`
   })
-
   future.forEach(booking => {
     ccBookings.innerHTML +=
       `<div class="future-booking-card" >
@@ -72,24 +70,54 @@ function capitalize(s) {
 }
 
 
+// const newBooking = {
+//   userID: customer.id,
+//   date: calendarDate.value,
+//   roomNumber: e.target.id
+// }
+  .replaceAll("-", "/")
+
+event.closest()
+
+availableRoomsPage.addEventListener('click', (e) => {
+  if (event.target.type === 'button') {
+  makeBooking(customer.id, e.target.dataset.date, e.target.id)
+}
+})
+
+let makeBooking(id, date, roomNumber) {
+  Promise.all([bookingPost(id, date, roomNumber)]).then(response => {
+    console.log(response, 'response')
+    {
+    message: 'message',
+    newBooking: {
+      id: ';aowkgh;osndv',
+      date: '22/222/2222',
+      roomNumber: 22
+    }
+    // response[0].newBooking
+  })
+}
+
+const hide = (element) => element.classList.add('hidden')
+
+const show = (element) => element.classList.remove('hidden')
+
+
 roomInputBox.addEventListener('input', (e) => {
   dateInputError.classList.add('hidden')
-  checkForDate(e)
   filterFormInput(e)
 })
 
-let filterFormInput = (e) => {
+filterFormInput = (e) => {
   let date = moment(calendar.value).format('YYYY/MM/DD')
-  if (!checkForDate(e)) {
-    return
-  } else if (e.target.id === 'calendarDate' && checkForDate(e)) {
+  if (e.target.id === 'calendarDate') {
     roomSelection.disabled = false;
     ccBookings.classList.add('hidden')
     hotel.getAvailRoomsByDate(date)
     displayAvailableRooms()
     availRooms.classList.remove('hidden')
   } else if (e.target.id === 'roomTypes') {
-    console.log(e.target.id, 'id', e.target.value, 'value')
     hotel.getAvailRoomsByDate(date)
     hotel.getAvailRoomsByType(e.target.value)
     displayAvailableRooms()
@@ -97,58 +125,26 @@ let filterFormInput = (e) => {
   }
 }
 
-let checkForDate = (e) => {
-  if (e.target.value.slice(-10, -6) != '2022' || '2023') {
-    dateInputError.classList.remove('hidden')
-    return false
-  } else {
-    return true
-  }
-
-}
 
 
-// submitButton.addEventListener('click', () => {
-//   console.log(roomSelection.value, 'roomValue')
-//   if (roomSelection.value === 'Choose a roomtype') {
-//
-//     displayAvailableRooms(moment(calendar.value).format('YYYY-MM-DD'))
-//   } else {
-//     let roomsByDate = hotel.getAvailRooms(calendar.value)
-//       let roomsByType = roomsByDate.filter(room => {
-//         return room.roomType === roomSelection.value
-//       })
-//       console.log(roomsByType, 'roomebythypw')
-//     }
-// })
-//
-//
-// calendar.addEventListener('input', () => {
-//
-// })
-
-// function displayAvailableRooms() {
-//   availRooms.innerHTML = ''
-//
-// }
-
-
-
-
-//'rooms', rooms)
 function displayAvailableRooms() {
   let rooms = hotel.availableRooms
   availRooms.innerHTML = ''
   rooms.forEach(room => {
+
     availRooms.innerHTML +=
-      `<p id='room${room.number}'>Rooms avilable on ${calendarDate.value}</p>
-      <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
-      <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
-      <ul>Beds: ${room.numBeds} </ul>
-      <ul>Bed size: ${capitalize(room.bedSize)}</ul>
-      <ul>Cost: $${room.costPerNight}</ul>`
+      `<div id='${room.number}'>
+        <p>Rooms avilable on ${calendarDate.value}</p>
+        <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
+        <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
+        <ul>Beds: ${room.numBeds} </ul>
+        <ul>Bed size: ${capitalize(room.bedSize)}</ul>
+        <ul>Cost: $${room.costPerNight}</ul>
+        <button id='${room.number}' data-date="${calendarDate.value}">Book</button>
+      </div>`
   })
 }
+
 
 window.onload = (event) => {
   Promise.all([bookings(), rooms(), customers()]).then((values) => {
