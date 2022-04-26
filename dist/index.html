@@ -22,7 +22,7 @@
       </nav>
       <main class="">
           <aside>
-            <form id='roomInputBox'>
+            <form id='roomDateInputBox' class='room-date-input-box'>
               <h2>Booking Calender</h2>
               <div class="calendar-box" id="calendarBox">
                   <label class="calendar-label" for="calendar-start"></label>
@@ -38,10 +38,11 @@
                   <div id="dateInputError" class="date-input-error hidden">Please input a valid Date</div>
               </div>
               </form>
+              <button id="showBookingsButton" class="show-bookings-button">Show Bookings</button>
           </aside>
           <section class="main-info-window">
-              <div id="customerBookingsData" class="customer-bookings-data scrollable">
-              </div>
+              <p id="noRoomsError" class="no-rooms-error hidden">We fiercely apoligize, there are no rooms available!!!!</p>
+              <div id="customerBookingsData" class="customer-bookings-data scrollable"></div>
               <p class="available-title hidden">Available Rooms...</p>
               <div id="availableRoomsPage" class='available-rooms-data hidden scrollable'>
               </div>

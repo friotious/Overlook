@@ -45,15 +45,22 @@ h1 {
 aside {
   width: 15vw;
   height: 80vh;
+  align-items: center;
 }
 
 h2 {
   font-size: 50;
 }
 
+.room-date-input-box {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
 .calendar-box {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .calendar-date-input {
@@ -61,11 +68,9 @@ h2 {
 }
 
 .date-input-error {
-
 }
 
 .calendar-label {
-
   /* height: 35px; */
 }
 
@@ -77,6 +82,28 @@ h2 {
 .roomtype-selected {
 
 }
+
+.show-bookings-button {
+    display: inline-block;
+    outline: 1px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 2px 16px;
+    height: 50px;
+    min-width: 150px;
+    min-height: 55px;
+    border: none;
+    color: black;
+    background-color: rgb(100, 91, 222);
+    transition: background-color .07s ease,color .17s ease;
+  }
+
+  .show-bookings-button:hover {
+    background-color: rgb(65, 77, 180);
+  }
 
 .submit-button {
   background-color: #E6D5AA;
@@ -101,15 +128,6 @@ h2 {
 }
 
 
-
-/* .room-select {
-  height: 55px;
-} */
-
-#calenderToday {
-
-}
-
 /* < _____________ > Room/Bookings display Section < ____________________ > */
 
 main {
@@ -131,8 +149,11 @@ main {
   height: 80vh;
 }
 
+.no-rooms-error,
 .available-title {
-font-size: 16px;
+font-size: 20px;
+color: #050A30;
+font-weight: bold;
 }
 
 .available-rooms-data,
