@@ -7,7 +7,7 @@ let moment = require('moment')
 class Hotel {
   constructor(bookingData = [], roomData = [], customerData = [], id) {
     this.currentDate = moment().format('YYYY/MM/DD');
-    this.allBookings = bookingData.map(booking => new Booking(booking))
+    this.allBookings = this.saveBookings(bookingData)
     this.allRooms = roomData.map(room => new Room(room))
     this.allCustomers = customerData.map(customer => new Customer(customer))
     this.currentCustomerID = id
@@ -15,8 +15,18 @@ class Hotel {
     this.availableRooms;
   }
 
+  saveBookings(bookingData) {
+    return bookingData.map(booking => new Booking(booking))
+  }
+
   getAvailRoomsByType(roomType) {
+    if (roomType === 'Choose a roomtype') {
+      return this.availableRooms
+    }
     this.availableRooms = this.availableRooms.filter(room => room.roomType === roomType)
+    if (!this.availableRooms[0]) {
+      return false
+    }
     return this.availableRooms
   }
 
@@ -33,8 +43,7 @@ class Hotel {
   }
 
   addCurrentCustomer(id) {
-    let newCustomer = this.allCustomers.find(customer => customer.id === id)
-    this.currentCustomer = newCustomer
+    this.currentCustomer = this.allCustomers.find(customer => customer.id === id)
   }
 
   addBookings() {

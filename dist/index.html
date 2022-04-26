@@ -14,6 +14,7 @@
           <section class="title">
               <h1>OverLook Hotel</h1>
           </section>
+          availableRoomsData
           <section class="user-data-box">
               <p id="userName">User Name</p>
               <p id="totalSpent"="">$pent</p>
@@ -25,7 +26,7 @@
               <h2>Booking Calender</h2>
               <div class="calendar-box" id="calendarBox">
                   <label class="calendar-label" for="calendar-start"></label>
-                  <input class="calendar-date-input" type="date" id="calendarDate"  value="" name="calendar" required pattern>
+                  <input class="calendar-date-input" type="date" id="calendarDate"  max='2023-12-31' value="" name="calendar" required pattern>
                   <label class="room-types-label" for="room-select">Room Types:</label>
                   <select class"room-select" name='roomtypes'  id="roomTypes" disabled>
                       <option class="roomtype-selected" name="roomtypes" value="Choose a roomtype">Choose a roomtype</option>
@@ -39,10 +40,10 @@
               </form>
           </aside>
           <section class="main-info-window">
-              <div class="customer-bookings-data scrollable">
+              <div id="customerBookingsData" class="customer-bookings-data scrollable">
               </div>
               <p class="available-title hidden">Available Rooms...</p>
-              <div class='available-rooms-data hidden scrollable'>
+              <div id="availableRoomsPage" class='available-rooms-data hidden scrollable'>
               </div>
           </section>
       </main>
