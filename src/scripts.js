@@ -37,12 +37,7 @@ window.onload = (event) => {
     hotel.addBookings()
     hotel.addCurrentCustomer(1)
     customer = hotel.currentCustomer
-    customer.sortBookings()
-    displayCCBookings()
-    displayUserName()
-    displaySpent()
-    calendar.min = moment().format('YYYY-MM-DD')
-    calendar.value = moment().format('YYYY-MM-DD');
+    updatePage()
   });
 };
 
@@ -60,11 +55,7 @@ roomDateInputBox.addEventListener('input', (e) => {
 })
 
 showBookingsButton.addEventListener('click', (e) => {
-  console.log('test click me', e)
-  customer.sortBookings()
-  displayCCBookings()
-  displaySpent()
-  resetInputs()
+  updatePage()
   show(ccBookings)
   hide(availRooms)
   hide(noRoomsError)
@@ -75,6 +66,8 @@ const checkVacancy = () => {
     show(noRoomsError)
     hide(ccBookings)
     hide(availRooms)
+  } else {
+    hide(noRoomsError)
   }
 }
 
@@ -115,19 +108,14 @@ const displaySpent = () => spent.innerText = customer.calculateTotalSpent()
 //------- display rooms filtered by date/type from aside-form---------//
 
 const displayFormInput = (e) => {
-  console.log(roomSelection.value, 'roomselection')
   let date = moment(calendar.value).format('YYYY/MM/DD')
   if (e.target.id === 'calendarDate') {
     roomSelection.disabled = false;
     hide(ccBookings)
-    hotel.getAvailRoomsByDate(date)
-    hotel.getAvailRoomsByType(roomSelection.value)
-    displayAvailableRooms()
+    displayRooms()
     show(availRooms)
   } else if (e.target.id === 'roomTypes') {
-    hotel.getAvailRoomsByDate(date)
-    hotel.getAvailRoomsByType(e.target.value)
-    displayAvailableRooms()
+    displayRooms()
   }
 }
 
@@ -142,8 +130,8 @@ const displayAvailableRooms = () => {
   availRooms.innerHTML = ''
   rooms.forEach(room => {
     availRooms.innerHTML +=
-      `<div id='${room.number}'>
-        <p>Rooms avilable on ${date}</p>
+      `<div id='${room.number}' class="available-rooms-card">
+        <ul>Rooms avilable on ${date}</ul>
         <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
         <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
         <ul>Beds: ${room.numBeds} </ul>
@@ -165,9 +153,7 @@ const makeBooking = (id, date, roomNumber) => {
         hotel.allBookings = output
         hotel.addRoom()
         hotel.addBookings()
-        hotel.getAvailRoomsByDate(date)
-        hotel.getAvailRoomsByType(roomSelection.value)
-        displayAvailableRooms()
+        displayRooms()
     })
   })
 
@@ -182,8 +168,24 @@ const show = (element) => element.classList.remove('hidden')
 const capitalize = (s) => s[0].toUpperCase() + s.slice(1);
 
 const resetInputs = () => {
+  calendar.min = moment().format('YYYY-MM-DD')
   calendar.value = moment().format('YYYY-MM-DD')
   roomSelection.value = "Choose a roomtype"
+}
+
+const displayRooms = () => {
+  let date = moment(calendar.value).format('YYYY/MM/DD')
+  hotel.getAvailRoomsByDate(date)
+  hotel.getAvailRoomsByType(roomSelection.value)
+  displayAvailableRooms()
+}
+
+const updatePage = ()  => {
+  customer.sortBookings()
+  displayCCBookings()
+  displayUserName()
+  displaySpent()
+  resetInputs()
 }
 
 
