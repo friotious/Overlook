@@ -9,9 +9,11 @@ import Room from '../src/classes/Room.js';
 
 describe('Hotel', () => {
   let hotel
+  let date
 
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms, customers, 1 )
+    date = moment().format('YYYY/MM/DD')
   })
 
   it('Should be a function', () => {
@@ -19,25 +21,57 @@ describe('Hotel', () => {
   });
 
   it('Should have the current date', () => {
-    let date = moment().format('YYYY/MM/DD')
-    hotel.getCurrentDate()
     expect(hotel.currentDate).to.equal(date)
   })
 
   it('Should add/hold currentCustomer ID', () => {
-    expect(hotel.currentCustomer.id).to.equal(1)
+    expect(hotel.currentCustomer.id).to.equal()
+    hotel.addCurrentCustomer(2)
+    expect(hotel.currentCustomer.id).to.equal(2)
   })
 
-  it('Should have a method to instanciate allCustomers', () => {
+  it('Should hold instances of all Customers', () => {
     expect(hotel.allCustomers[0]).to.be.an.instanceOf(Customer)
   })
 
-  it('Should have a method to instanciate allRooms', () => {
+  it('Should hold instances of all Rooms', () => {
     expect(hotel.allRooms[0]).to.be.an.instanceOf(Room)
   })
 
-  it('Should have a method to instanciate allBookings', () => {
+  it('Should hold instances of all Bookings', () => {
     expect(hotel.allBookings[0]).to.be.an.instanceOf(Booking)
+  })
+
+  it('Should add Room to Bookings, Bookings to Customers', () => {
+    expect(hotel.allCustomers[0].allBookings).to.deep.equal([])
+    hotel.addBookings()
+    expect(hotel.allCustomers[0].allBookings[0]).to.be.instanceOf(Booking)
+    expect(hotel.allCustomers[0].allBookings[0].room).to.deep.equal({})
+    hotel.addRoom()
+    expect(hotel.allCustomers[0].allBookings[0].room).to.be.instanceOf(Room)
+  })
+
+  it('Should add instance of current Customer', () => {
+    expect(hotel.currentCustomer).to.deep.equal({})
+    hotel.addCurrentCustomer(1)
+    expect(hotel.currentCustomer).to.be.an.instanceOf(Customer)
+  })
+
+  it('Should have a method to get Bookings by id', () => {
+    expect(hotel.getBookingsByID(2)[0].userID).to.equal(2)
+  })
+
+  it('Should have a method to get available rooms by date', () => {
+    expect(hotel.availableRooms).to.equal(undefined)
+    hotel.getAvailRoomsByDate(date)
+    expect(hotel.availableRooms[0]).to.be.instanceOf(Room)
+  })
+
+  it('Should have a method to get available rooms by room type', () => {
+    expect(hotel.availableRooms).to.equal(undefined)
+    hotel.getAvailRoomsByDate(date)
+    hotel.getAvailRoomsByType('suite')
+    expect(hotel.availableRooms[0]).to.be.instanceOf(Room)
   })
 
 })

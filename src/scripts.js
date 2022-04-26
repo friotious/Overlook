@@ -3,68 +3,191 @@ import './css/styles.css';
 import {
   bookings,
   customers,
-  rooms
+  rooms,
+  bookingPost
 } from './apiCalls.js'
 import Hotel from './classes/Hotel.js';
 import datepicker from 'js-datepicker';
 let moment = require('moment')
 
-//------ HTML date element use onkeydown="return false" to prevent typing
-// make variabel ---
-//const picker = datepicker(input, { alwaysShow: true })
-//  make querySelector for input, next parameter is 'state' of calender
-//  make eventListener for 'click' should return date in some format.
-//----------
-
 //<-----QUERY SELECTORS-------------------------->///////////
-let spent = document.querySelector('#totalSpent')
-let userName = document.querySelector('#userName')
-let ccBookings = document.querySelector('.customer-bookings-data')
-let currentCustomer = document.querySelector('#userName')
-let totalSpent = document.querySelector('#totalSpent')
+
+let userName = document.getElementById('userName')
+let spent = document.getElementById('totalSpent')
+let ccBookings = document.getElementById('customerBookingsData')
+let availRooms = document.getElementById('availableRoomsPage')
+let calendarBox = document.getElementById('calendarBox')
+let calendar = document.getElementById('calendarDate')
+let submitButton = document.getElementById('submitButton')
+let roomDateInputBox = document.getElementById('roomDateInputBox')
+let dateInputError = document.getElementById('dateInputError')
+let roomSelection = document.getElementById("roomTypes")
+let availableRoomsPage = document.getElementById("availableRoomsPage")
+let showBookingsButton = document.getElementById("showBookingsButton")
+let noRoomsError = document.getElementById("noRoomsError")
 let hotel
 let customer
 
-function displayUserName() {
-  userName.innerText = hotel.currentCustomer.name
+//<-----> EVENT LISTENERS <-------------------------->///////////
+
+window.onload = (event) => {
+  Promise.all([bookings(), rooms(), customers()]).then((values) => {
+    hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers)
+    hotel.addRoom()
+    hotel.addBookings()
+    hotel.addCurrentCustomer(1)
+    customer = hotel.currentCustomer
+    updatePage()
+  });
+};
+
+availableRoomsPage.addEventListener('click', (e) => {
+  e.target.disabled = true
+  let date = moment(calendar.value).format('YYYY/MM/DD')
+  if (e.target.type === 'submit') {
+    makeBooking(customer.id, e.target.dataset.date, e.target.id)
+    displayAvailableRooms()
+  }
+})
+
+roomDateInputBox.addEventListener('input', (e) => {
+  displayFormInput(e)
+})
+
+showBookingsButton.addEventListener('click', (e) => {
+  updatePage()
+  show(ccBookings)
+  hide(availRooms)
+  hide(noRoomsError)
+})
+
+const checkVacancy = () => {
+  if(!hotel.availableRooms[0]) {
+    show(noRoomsError)
+    hide(ccBookings)
+    hide(availRooms)
+  } else {
+    hide(noRoomsError)
+  }
 }
 
-function displaySpent() {
-  spent.innerText = hotel.currentCustomer.calculateTotalSpent()
-}
 
-function displayCCBookings() {
-  let past = hotel.currentCustomer.getPastBookings()
-  let future = hotel.currentCustomer.getFutureBookings()
+////<---------> DISPLAY ON PAGE <-------------------------->//////
+
+    //-display current customers bookings past/future----////
+
+const displayCCBookings = () => {
+  let past = customer.getPastBookings()
+  let future = customer.getFutureBookings()
   ccBookings.innerHTML = ''
-  //Display past bookings
   past.forEach(booking => {
     ccBookings.innerHTML +=
       `<div class="past-booking-card" >
         <ul>You Stayed here on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
-        <ul>${booking.getRoom()}</ul>
+        <ul>${booking.roomNumber}</ul>
         <ul>${booking.getBed()}</ul>
       </div>`
   })
-
   future.forEach(booking => {
     ccBookings.innerHTML +=
       `<div class="future-booking-card" >
         <ul>You're booked on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
-        <ul>${booking.getRoom()}</ul>
+        <ul>${booking.roomNumber}</ul>
         <ul>${booking.getBed()}</ul>
     </div>`
   })
 }
 
-Promise.all([bookings, rooms, customers]).then((values) => {
-  hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers);
-  hotel.addCurrentCustomer(1)
-  customer = hotel.currentCustomer
+const displayUserName = () => userName.innerText = customer.name
+
+const displaySpent = () => spent.innerText = customer.calculateTotalSpent()
+
+
+//------- display rooms filtered by date/type from aside-form---------//
+
+const displayFormInput = (e) => {
+  let date = moment(calendar.value).format('YYYY/MM/DD')
+  if (e.target.id === 'calendarDate') {
+    roomSelection.disabled = false;
+    hide(ccBookings)
+    displayRooms()
+    show(availRooms)
+  } else if (e.target.id === 'roomTypes') {
+    displayRooms()
+  }
+}
+
+
+
+//---------- display Room cards ----------//
+
+const displayAvailableRooms = () => {
+  checkVacancy()
+  let rooms = hotel.availableRooms
+  let date = moment(calendar.value).format('YYYY/MM/DD')
+  availRooms.innerHTML = ''
+  rooms.forEach(room => {
+    availRooms.innerHTML +=
+      `<div id='${room.number}' class="available-rooms-card">
+        <ul>Rooms avilable on ${date}</ul>
+        <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
+        <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
+        <ul>Beds: ${room.numBeds} </ul>
+        <ul>Bed size: ${capitalize(room.bedSize)}</ul>
+        <ul>Cost: $${room.costPerNight}</ul>
+        <button class="book-button" id='${room.number}' data-date="${date}">Book</button>
+      </div>`
+  })
+}
+
+const makeBooking = (id, date, roomNumber) => {
+    bookingPost(id, date, roomNumber).then(response => {
+    if (!response.newBooking) {
+      console.log(response)
+    }
+  }).then(() =>  {
+    return bookings().then(data => {
+        let output = hotel.saveBookings(data.bookings)
+        hotel.allBookings = output
+        hotel.addRoom()
+        hotel.addBookings()
+        displayRooms()
+    })
+  })
+
+}
+
+//<----- HELPER METHODS -------------------------->///////////
+
+const hide = (element) => element.classList.add('hidden')
+
+const show = (element) => element.classList.remove('hidden')
+
+const capitalize = (s) => s[0].toUpperCase() + s.slice(1);
+
+const resetInputs = () => {
+  calendar.min = moment().format('YYYY-MM-DD')
+  calendar.value = moment().format('YYYY-MM-DD')
+  roomSelection.value = "Choose a roomtype"
+}
+
+const displayRooms = () => {
+  let date = moment(calendar.value).format('YYYY/MM/DD')
+  hotel.getAvailRoomsByDate(date)
+  hotel.getAvailRoomsByType(roomSelection.value)
+  displayAvailableRooms()
+}
+
+const updatePage = ()  => {
   customer.sortBookings()
   displayCCBookings()
   displayUserName()
   displaySpent()
-});
+  resetInputs()
+}
+
+
+
+//------------NOTES - IDEAS - WTF?? ------------------------------------///////////////

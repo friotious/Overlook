@@ -1,5 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
+let moment = require('moment')
 
 import { bookings, rooms, customers} from './testData.js'
 import Customer from '../src/classes/Customer.js';
@@ -12,7 +13,11 @@ describe('Customer', () => {
 
   beforeEach(() => {
     hotel = new Hotel(bookings, rooms, customers, 1)
+    hotel.addRoom()
+    hotel.addBookings()
+    hotel.addCurrentCustomer(1)
     customer = hotel.currentCustomer
+
   })
 
   it('Should be a function', () => {
@@ -20,7 +25,8 @@ describe('Customer', () => {
   });
 
   it('Should hold current date', () => {
-    expect(customer.currentDate).to.equal(hotel.getCurrentDate())
+    let date = moment().format('YYYY/MM/DD')
+    expect(customer.currentDate).to.equal(date)
   })
 
   it('Should hold customer data', () => {
@@ -39,16 +45,16 @@ describe('Customer', () => {
     expect(customer.totalSpent).to.equal(638.74)
   })
 
-  it('Should filter past/present/future bookings', () => {
+  it('Should filter past and future bookings and store them', () => {
     customer.sortBookings()
-    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6t5')
+    expect(customer.pastBookings[0].id).to.equal("5fwrgu4i7k55hl6t6")
+    expect(customer.futureBookings[0].id).to.equal('5fwrgu4i7k55hl6sz')
   })
 
   it('Should have methods to return all Bookings', () => {
     customer.sortBookings()
-    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6t5')
+    expect(customer.getPastBookings()[0].id).to.equal("5fwrgu4i7k55hl6t6")
+    expect(customer.getFutureBookings()[0].id).to.equal('5fwrgu4i7k55hl6sz')
   })
 
 })

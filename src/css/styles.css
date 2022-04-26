@@ -1,52 +1,202 @@
-
 /* @import '~js-datepicker/dist/datepicker.min.css'; */
-
-* {
+/* * {
   border: 1px solid black;
-}
-
+} */
 /* < _____________ > NAV < ____________________ > */
-
 nav {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
   height: 20vh;
   width: 100vw;
-  justify-content: space-between;
 }
 
 .home {
   width: 15vw;
   height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  height: 8vh;
+  width: 11vw;
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #d9c8a0;
+  font-size: 24;
+  text-align: center;
+  border-radius: 0.7em;
+  border: 1px solid black;
 }
 
 .title {
   width: 30vw;
-  height: 20vh;
+  height: 10vw;
+  border: 1px solid black;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
 }
 
 .user-data-box {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
+  justify-content: space-around;
   width: 15vw;
-  height: 20vh;
-
+  height: 15vw;
 }
-#totalSpent,
-#userName {
-  background-color: pink;
+
+.total-spent,
+.user-name {
+  height: 11vh;
+  width: 14vw;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #d9c8a0;
+  font-size: 24;
+  text-align: center;
+  border-radius: 0.7em;
+  border: 1px solid black;
 }
 
 /* ______________ > Calender/Date selection/filter Sidebar < ______ > */
 aside {
   width: 15vw;
   height: 80vh;
+  align-items: center;
+  padding-left: 15px;
+}
+
+h2 {
+  font-size: 50;
+}
+
+.room-date-input-box {
+  height: 280px;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.calendar-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calendar-date-input {
+  height: 30px;
+  width: auto;
+  font-size: 20px;
+}
+
+.date-input-error {}
+
+.calendar-label {
+  /* height: 35px; */
+}
+
+.room-types-label {
+  font-size: 24px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  height: 24px;
+}
+
+.room-select {
+  font-size: 24px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  height: 24px;
+}
+
+.roomtype-selected {}
+
+.show-bookings-button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.bookings-button-divs {
+  height: 33vw;
+}
+
+.show-bookings-button {
+  display: inline-block;
+  outline: 1px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 2px 16px;
+  height: 50px;
+  min-width: 150px;
+  min-height: 55px;
+  border: none;
+  color: black;
+  background-color: rgb(100, 91, 222);
+  transition: background-color .07s ease, color .17s ease;
+}
+
+.show-bookings-button:hover {
+  background-color: rgb(65, 77, 180);
+}
+
+.submit-button {
+  background-color: #E6D5AA;
+  border: none;
+  color: black;
+  padding: 25px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #E6DABE;
+  border: none;
+  color: #685D5D;
+  padding: 25px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 24.5px;
+  cursor: pointer;
 }
 
 /* < _____________ > Room/Bookings display Section < ____________________ > */
+main {
+  display: flex;
+  width: 100vw;
+  height: 80vh;
+}
 
-
-
-.main-info {
+.main-info-window {
   /* height: 88%;
   width: 100%; */
   display: grid;
@@ -58,26 +208,55 @@ aside {
   height: 80vh;
 }
 
+.no-rooms-error,
+.available-title {
+  font-size: 20px;
+  color: #050A30;
+  font-weight: bold;
+}
+
+.available-rooms-data,
 .customer-bookings-data {
-  background-color: #f7f4ea;
+  display: grid;
+  grid-row-gap: 15px;
+  background-color: white;
   height: 100vh;
   width: 85vw;
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 450px;
-  padding: 10px;
+  padding: 25px;
 }
 
+.available-rooms-card,
 .future-booking-card,
 .past-booking-card {
   display: flex;
   flex-direction: column;
+  background-color: #f7f4ea;
+  border: 1px solid black;
+  border-radius: 1em;
 }
 
-main {
-  display: flex;
-  width: 100vw;
-  height: 80vh;
+.book-button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 2px 16px;
+  height: 38px;
+  min-width: 96px;
+  min-height: 38px;
+  border: none;
+  color: #fff;
+  background-color: rgb(88, 101, 242);
+  transition: background-color .17s ease, color .17s ease;
+}
+
+.book-button:hover {
+  background-color: rgb(71, 82, 196);
 }
 
 /* .scrollable {
@@ -85,9 +264,9 @@ main {
   overflow: auto;
   background-color: white;
 } */
-
-
-
+.hidden {
+  display: none;
+}
 
 body {
   /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */

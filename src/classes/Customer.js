@@ -31,7 +31,7 @@ class Customer {
          this.totalSpent += booking.getCost()
        }
      })
-     return this.totalSpent
+     return Math.round(this.totalSpent * 100) / 100
    }
 
    getAllBookings() {

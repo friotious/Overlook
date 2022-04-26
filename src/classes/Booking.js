@@ -13,10 +13,6 @@ class Booking {
     return this.room.costPerNight
   }
 
-  getRoom() {
-    return this.room.roomType
-  }
-
   getBed() {
     return this.room.bedSize
   }
