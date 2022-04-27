@@ -14,6 +14,7 @@ let moment = require('moment')
 let nav = document.querySelector('.nav')
 let main = document.querySelector('.main')
 let loginScreen = document.querySelector('.login-screen')
+let loginMessage = document.querySelector('.login-message')
 let loginError = document.querySelector('.login-error-message')
 let loginButton = document.querySelector('.submit-login-button')
 let userName = document.getElementById('userName')
@@ -41,6 +42,8 @@ let customer
 
 //<-----> EVENT LISTENERS <-------------------------->///////////
 loginButton.addEventListener('click', (e) => {
+  show(loginMessage)
+  hide(loginError)
   checkLogin(usernameInput.value, passwordInput.value)
 })
 
@@ -54,17 +57,6 @@ window.addEventListener('load', () => {
   })
 });
 
-const displayLogin = () => {
-  show(loginScreen)
-  hide(nav)
-  hide(main)
-}
-
-const displayMain = () => {
-  show(main)
-  show(nav)
-  hide(loginScreen)
-}
 
 const checkLogin = (name, password) => {
   let userID = name.split('r')[1]
@@ -78,6 +70,7 @@ const checkLogin = (name, password) => {
         hide(loginError)
   } else {
     show(loginError)
+    hide(loginMessage)
   }
 }
 //toggle login/main SCREEN
@@ -91,7 +84,7 @@ const checkLogin = (name, password) => {
 
 //   addCurrentCustomer( ->ID from login<- )
 //   updatePage()
-//   displayRooms()
+//   displayRooms()bookingPost
 
 
 
@@ -240,6 +233,20 @@ const updateAll = ()  => {
   displayUserName()
   displaySpent()
   resetInputs()
+}
+
+const displayLogin = () => {
+  show(loginMessage)
+  hide(loginError)
+  show(loginScreen)
+  hide(nav)
+  hide(main)
+}
+
+const displayMain = () => {
+  show(main)
+  show(nav)
+  hide(loginScreen)
 }
 
 

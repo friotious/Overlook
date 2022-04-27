@@ -7,26 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Overlook</title>
 </head>
+
 <body>
 
-  <section id="loginScreen" class="login-screen">
+  <section id="loginScreen" class="login-screen hidden">
     <div class="login-container">
-  <!-- LOGIN MESSAGE ------------>
+      <!-- LOGIN MESSAGE ------------>
       <div class='login-message'>
-        <p class="login-message">Please Login</p>
-        <p class="login-error-message hidden">Username or password is incorrect, try again</p>
+        <span class="login-message">Please Login</span>
+        <span class="login-error-message hidden">Username or password is incorrect, try again</span>
       </div>
-    <!-- USERNAME INPUT ------------>
+      <!-- USERNAME INPUT ------------>
       <div class='login-inputs'>
         <label for="usernameInput" tabindex=0>Username</label>
         <input id='usernameInput' class="username-input login-inputs" type="text" placeholder="username..." name="userName" required>
       </div>
-    <!-- PASSWORD  INPUT ------------>
+      <!-- PASSWORD  INPUT ------------>
       <div class='login-inputs'>
         <label for="passwordInput" tabindex=0>Password</label>
         <input id="passwordInput" class="password-input login-inputs" type="password" placeholder="password..." name="password" required>
       </div>
-    <!-- LOGIN BUTTON  ------------>
+      <!-- LOGIN BUTTON  ------------>
       <div class='login-button'>
         <button id="loginButton" class="submit-login-button" type="submit" value="">Login</button>
       </div>
@@ -34,7 +35,7 @@
     </div>
   </section>
 
-  <nav class="nav hidden">
+  <nav class="nav">
     <section class="home">
       <p id="home">Home</p>
     </section>
@@ -43,11 +44,11 @@
     </section>
     <section class="user-data-box">
       <p id="userName" class='user-name' tabindex=0>User Name</p>
-      <p id="totalSpent"class="total-spent" tabindex=0>$pent</p>
+      <p id="totalSpent" class="total-spent" tabindex=0>$pent</p>
     </section>
   </nav>
 
-  <main class='main hidden'>
+  <main class='main'>
     <aside>
       <form id='roomDateInputBox' class='room-date-input-box'>
         <h2>Booking Calender</h2>
@@ -72,7 +73,6 @@
       </section>
     </aside>
 
-
     <section class="main-info-window">
       <p id="noRoomsError" class="no-rooms-error hidden" tabindex=0>We fiercely apoligize, there are no rooms available!!!!</p>
       <div id="customerBookingsData" class="customer-bookings-data scrollable"></div>
@@ -81,12 +81,7 @@
       </div>
     </section>
 
-
   </main>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-
   <script src="bundle.js"></script>
 </body>
 

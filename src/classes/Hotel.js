@@ -33,13 +33,14 @@ class Hotel {
   getAvailRoomsByDate(date) {
     this.availableRooms = this.allRooms
     let notAvailable = this.allBookings.filter(booking => {
-      return booking.date === date}).map(booking => booking.roomNumber)
-      if(!notAvailable[0]) {
-        return this.availableRooms
-      } else if (notAvailable[0]) {
-          this.availableRooms = this.availableRooms.filter(room => !notAvailable.includes(room.number))
-          return this.availableRooms
-      }
+      return booking.date === date
+    }).map(booking => booking.roomNumber)
+    if (!notAvailable[0]) {
+      return this.availableRooms
+    } else if (notAvailable[0]) {
+      this.availableRooms = this.availableRooms.filter(room => !notAvailable.includes(room.number))
+      return this.availableRooms
+    }
   }
 
   addCurrentCustomer(id) {
@@ -77,9 +78,6 @@ class Hotel {
     return this.allCustomers.find(customer => customer.id === parseInt(id))
   }
 
-  makeBooking(somedata) {
-  }
+}
 
-  }
-
-  export default Hotel;
+export default Hotel;
