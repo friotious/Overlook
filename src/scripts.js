@@ -11,7 +11,11 @@ import datepicker from 'js-datepicker';
 let moment = require('moment')
 
 //<-----QUERY SELECTORS-------------------------->///////////
-
+let nav = document.querySelector('.nav')
+let main = document.querySelector('.main')
+let loginScreen = document.querySelector('.login-screen')
+let loginError = document.querySelector('.login-error-message')
+let loginButton = document.querySelector('.submit-login-button')
 let userName = document.getElementById('userName')
 let spent = document.getElementById('totalSpent')
 let ccBookings = document.getElementById('customerBookingsData')
@@ -25,21 +29,71 @@ let roomSelection = document.getElementById("roomTypes")
 let availableRoomsPage = document.getElementById("availableRoomsPage")
 let showBookingsButton = document.getElementById("showBookingsButton")
 let noRoomsError = document.getElementById("noRoomsError")
+
+let usernameInput = document.querySelector('.username-input')
+let passwordInput = document.querySelector('.password-input')
+
+
+
+//-------LOGIN QUERY SELECTORS-------------------------->///////////
 let hotel
 let customer
 
 //<-----> EVENT LISTENERS <-------------------------->///////////
+loginButton.addEventListener('click', (e) => {
+  checkLogin(usernameInput.value, passwordInput.value)
+})
 
-window.onload = (event) => {
+//--------LOGIN/onload  METHODS----------------?????
+window.addEventListener('load', () => {
   Promise.all([bookings(), rooms(), customers()]).then((values) => {
     hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers)
     hotel.addRoom()
     hotel.addBookings()
-    hotel.addCurrentCustomer(1)
-    customer = hotel.currentCustomer
-    updatePage()
-  });
-};
+    console.log(hotel, 'hotel;')
+  })
+});
+
+const displayLogin = () => {
+  show(loginScreen)
+  hide(nav)
+  hide(main)
+}
+
+const displayMain = () => {
+  show(main)
+  show(nav)
+  hide(loginScreen)
+}
+
+const checkLogin = (name, password) => {
+  let userID = name.split('r')[1]
+  console.log(name, 'name', password, 'password', userID, 'ID')
+  if (name.includes('customer') && hotel.checkID(userID) && password === 'overlook2021') {
+        hotel.addCurrentCustomer(userID)
+        customer = hotel.currentCustomer
+        console.log(hotel.currentCustomer, 'hotelCC')
+        updateAll()
+        displayMain()
+        hide(loginError)
+  } else {
+    show(loginError)
+  }
+}
+//toggle login/main SCREEN
+
+
+  //   show(mainScreen)
+  //   hide(loginScreen)
+  //
+//     show(loginScreen)
+//   hide(mainScreen)
+
+//   addCurrentCustomer( ->ID from login<- )
+//   updatePage()
+//   displayRooms()
+
+
 
 availableRoomsPage.addEventListener('click', (e) => {
   e.target.disabled = true
@@ -55,7 +109,7 @@ roomDateInputBox.addEventListener('input', (e) => {
 })
 
 showBookingsButton.addEventListener('click', (e) => {
-  updatePage()
+  updateAll()
   show(ccBookings)
   hide(availRooms)
   hide(noRoomsError)
@@ -82,7 +136,7 @@ const displayCCBookings = () => {
   ccBookings.innerHTML = ''
   past.forEach(booking => {
     ccBookings.innerHTML +=
-      `<div class="past-booking-card" >
+      `<div class="past-booking-card" tabindex=0>
         <ul>You Stayed here on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
         <ul>${booking.roomNumber}</ul>
@@ -91,7 +145,7 @@ const displayCCBookings = () => {
   })
   future.forEach(booking => {
     ccBookings.innerHTML +=
-      `<div class="future-booking-card" >
+      `<div class="future-booking-card" tabindex=0>
         <ul>You're booked on ${booking.date}</ul>
         <ul>in room #${booking.roomNumber}</ul>
         <ul>${booking.roomNumber}</ul>
@@ -130,14 +184,14 @@ const displayAvailableRooms = () => {
   availRooms.innerHTML = ''
   rooms.forEach(room => {
     availRooms.innerHTML +=
-      `<div id='${room.number}' class="available-rooms-card">
+      `<div id='${room.number}' class="available-rooms-card" tabindex=0>
         <ul>Rooms avilable on ${date}</ul>
         <ul>Room #${room.number} - ${capitalize(room.roomType)}</ul>
         <ul>Bidet: ${room.bidet ? 'Yes' : 'sorry, no' }
         <ul>Beds: ${room.numBeds} </ul>
         <ul>Bed size: ${capitalize(room.bedSize)}</ul>
         <ul>Cost: $${room.costPerNight}</ul>
-        <button class="book-button" id='${room.number}' data-date="${date}">Book</button>
+        <button class="book-button" id='${room.number}' data-date="${date}" tabindex=0>Book</button>
       </div>`
   })
 }
@@ -180,7 +234,7 @@ const displayRooms = () => {
   displayAvailableRooms()
 }
 
-const updatePage = ()  => {
+const updateAll = ()  => {
   customer.sortBookings()
   displayCCBookings()
   displayUserName()

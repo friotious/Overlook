@@ -43,7 +43,7 @@ class Hotel {
   }
 
   addCurrentCustomer(id) {
-    this.currentCustomer = this.allCustomers.find(customer => customer.id === id)
+    this.currentCustomer = this.allCustomers.find(customer => customer.id === parseInt(id))
   }
 
   addBookings() {
@@ -71,6 +71,10 @@ class Hotel {
 
   getAllCustomerBookings() {
     return this.currentCustomer.bookings
+  }
+
+  checkID(id) {
+    return this.allCustomers.find(customer => customer.id === parseInt(id))
   }
 
   makeBooking(somedata) {
