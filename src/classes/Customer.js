@@ -13,7 +13,6 @@ class Customer {
     this.totalSpent = 0
   }
 
-  // ---->   input type date in HTML <------//
   sortBookings() {
     let sortAll = this.allBookings.sort((a, b) => {
       return a.date.split('/').join('') - b.date.split('/').join('')

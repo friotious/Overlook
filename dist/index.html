@@ -9,7 +9,30 @@
 </head>
 
 <body>
-  <nav class="">
+
+  <!-- LOGIN SCREEN ------------>
+  <section id="loginScreen" class="login-screen hidden">
+    <div class="login-container">
+      <div class='login-message'>
+        <span class="login-message">Please Login</span>
+        <span class="login-error-message hidden">Username or password is incorrect, try again</span>
+      </div>
+      <div class='login-inputs'>
+        <label for="usernameInput" tabindex=0>Username</label>
+        <input id='usernameInput' class="username-input login-inputs" type="text" placeholder="username..." name="userName" required>
+      </div>
+      <div class='login-inputs'>
+        <label for="passwordInput" tabindex=0>Password</label>
+        <input id="passwordInput" class="password-input login-inputs" type="password" placeholder="password..." name="password" required>
+      </div>
+      <div class='login-button'>
+        <button id="loginButton" class="submit-login-button" type="submit" value="">Login</button>
+      </div>
+
+    </div>
+  </section>
+
+  <nav class="nav">
     <section class="home">
       <p id="home">Home</p>
     </section>
@@ -17,18 +40,19 @@
       <h1>OverLook Hotel</h1>
     </section>
     <section class="user-data-box">
-      <p id="userName" class='user-name'>User Name</p>
-      <p id="totalSpent"class="total-spent">$pent</p>
+      <p id="userName" class='user-name' tabindex=0>User Name</p>
+      <p id="totalSpent" class="total-spent" tabindex=0>$pent</p>
     </section>
   </nav>
-  <main class="">
+
+  <main class='main'>
     <aside>
       <form id='roomDateInputBox' class='room-date-input-box'>
         <h2>Booking Calender</h2>
         <div class="calendar-box" id="calendarBox">
-          <label class="calendar-label" for="calendar-start"></label>
+          <label class="calendar-label" for="calendarDate"></label>
           <input class="calendar-date-input" type="date" id="calendarDate" max='2023-12-31' value="" name="calendar" required pattern>
-          <label class="room-types-label" for="room-select">Room Types:</label>
+          <label class="room-types-label" for="roomTypes">Room Types:</label>
           <select class"room-select" name='roomtypes' id="roomTypes" disabled>
             <option class="roomtype-selected" name="roomtypes" value="Choose a roomtype">Choose a roomtype</option>
             <option class="roomtype-selected" name="roomtypes" value="residential suite">residential suite</option>
@@ -40,23 +64,21 @@
         </div>
       </form>
       <section id="bookingButtonSection" class="show-bookings-button-section">
-        <button id="showBookingsButton" class="show-bookings-button">Show Bookings</button>
+        <button id="showBookingsButton" class="show-bookings-button" tabindex=0>Show Bookings</button>
         <div class="bookings-button-divs"></div>
         <div class="bookings-button-divs"></div>
       </section>
     </aside>
+
     <section class="main-info-window">
-      <p id="noRoomsError" class="no-rooms-error hidden">We fiercely apoligize, there are no rooms available!!!!</p>
+      <p id="noRoomsError" class="no-rooms-error hidden" tabindex=0>We fiercely apoligize, there are no rooms available!!!!</p>
       <div id="customerBookingsData" class="customer-bookings-data scrollable"></div>
       <p class="available-title hidden">Available Rooms...</p>
       <div id="availableRoomsPage" class='available-rooms-data hidden scrollable'>
       </div>
     </section>
+
   </main>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-
   <script src="bundle.js"></script>
 </body>
 
