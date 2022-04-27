@@ -39,6 +39,7 @@ let noRoomsError = document.getElementById("noRoomsError")
 let hotel
 let customer
 
+
 //<-----> EVENT LISTENERS <-------------------------->///////////
 window.addEventListener('load', () => {
   Promise.all([bookings(), rooms(), customers()]).then((values) => {
@@ -47,6 +48,12 @@ window.addEventListener('load', () => {
     hotel.addBookings()
   })
 });
+
+passwordInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+  loginButton.click()
+}
+})
 
 loginButton.addEventListener('click', (e) => {
   show(loginMessage)
@@ -80,7 +87,6 @@ const checkLogin = (name, password) => {
   if (name.includes('customer') && hotel.checkID(userID) && password === 'overlook2021') {
     hotel.addCurrentCustomer(userID)
     customer = hotel.currentCustomer
-    console.log(hotel.currentCustomer, 'hotelCC')
     updateAll()
     displayMain()
     hide(loginError)
@@ -103,7 +109,7 @@ const checkVacancy = () => {
 ////<---------> DISPLAY ON PAGE <-------------------------->//////
 const displayUserName = () => userName.innerText = customer.name
 
-const displaySpent = () => spent.innerText = customer.calculateTotalSpent()
+const displaySpent = () => spent.innerText = `Total Spent: $${customer.calculateTotalSpent()}`
 
 //-display current customers bookings past/future----////
 

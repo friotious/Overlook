@@ -11,9 +11,9 @@
 <body>
 
   <!-- LOGIN SCREEN ------------>
-  <section id="loginScreen" class="login-screen hidden">
+  <section id="loginScreen" class="login-screen">
     <div class="login-container">
-      <div class='login-message'>
+      <div class='login-messages'>
         <span class="login-message">Please Login</span>
         <span class="login-error-message hidden">Username or password is incorrect, try again</span>
       </div>
@@ -32,7 +32,7 @@
     </div>
   </section>
 
-  <nav class="nav">
+  <nav class="nav hidden">
     <section class="home">
       <p id="home">Home</p>
     </section>
@@ -45,7 +45,7 @@
     </section>
   </nav>
 
-  <main class='main'>
+  <main class='main hidden'>
     <aside>
       <form id='roomDateInputBox' class='room-date-input-box'>
         <h2>Booking Calender</h2>
@@ -71,7 +71,7 @@
     </aside>
 
     <section class="main-info-window">
-      <p id="noRoomsError" class="no-rooms-error hidden" tabindex=0>We fiercely apoligize, there are no rooms available!!!!</p>
+      <p id="noRoomsError" class="no-rooms-error hidden" tabindex=0>We fiercely apologize, there are no rooms available!!!!</p>
       <div id="customerBookingsData" class="customer-bookings-data scrollable"></div>
       <p class="available-title hidden">Available Rooms...</p>
       <div id="availableRoomsPage" class='available-rooms-data hidden scrollable'>

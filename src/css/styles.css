@@ -13,7 +13,6 @@
   width: 100vw;
 }
 
-/* -----LOGIN BOX------- */
 .login-container {
   justify-content: space-around;
   display: flex;
@@ -22,6 +21,9 @@
   width: 33vw;
 }
 
+.login-messages {
+
+}
 .login-error-message,
 .login-message {}
 
@@ -183,7 +185,7 @@ h2 {
 .bookings-button-divs {
   height: 33vw;
 }
-
+.submit-login-button,
 .show-bookings-button {
   display: inline-block;
   outline: 1px;
@@ -202,6 +204,9 @@ h2 {
   transition: background-color .07s ease, color .17s ease;
 }
 
+.submit-login-button:hover {
+  background-color: rgb(65, 77, 180);
+}
 .show-bookings-button:hover {
   background-color: rgb(65, 77, 180);
 }
