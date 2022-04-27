@@ -46,6 +46,10 @@ window.addEventListener('load', () => {
     hotel = new Hotel(values[0].bookings, values[1].rooms, values[2].customers)
     hotel.addRoom()
     hotel.addBookings()
+    hotel.addCurrentCustomer(2)
+    customer = hotel.currentCustomer
+    updateAll()
+    displayMain()
   })
 });
 
