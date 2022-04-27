@@ -40,7 +40,7 @@ Overlook is a hotel booking app project. TDD was used to test for the multiple c
 ## Set Up
 
 1. Fork repo, clone copy your local machine.
-2. cd into root directory and run npm install, npm start
+2. cd into root directory and run npm install, npm start 
 4. Local server [GitHub page](https://github.com/turingschool-examples/overlook-api)
 5. clone down and npm install, npm start
 6. To open the webpage run npm start within root the directory
@@ -68,3 +68,4 @@ Once in the application you will see many options. Each step will outline a feat
 ## Testing
 
 Mocha and chai used in TDD.  All class data model tests were written first.
+
